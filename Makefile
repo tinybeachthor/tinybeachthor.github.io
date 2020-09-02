@@ -5,8 +5,8 @@ build: clean
 
 .PHONY: clean
 clean:
-	rm -r docs/*
-	rm -r .shake
+	rm -rf docs/*
+	rm -rf .shake
 
 .PHONY: serve
 serve:

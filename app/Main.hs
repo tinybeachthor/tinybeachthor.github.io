@@ -1,6 +1,4 @@
 {-# LANGUAGE NamedFieldPuns        #-}
-{-# LANGUAGE DeriveGeneric         #-}
-{-# LANGUAGE DeriveAnyClass        #-}
 {-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 
@@ -8,18 +6,18 @@ module Main where
 
 import           Control.Lens
 import           Control.Monad
-import           Data.Aeson                 as A
+import           Data.Aeson
 import           Data.Aeson.Lens
 import           Data.Time
 import           Development.Shake
-import           Development.Shake.Classes
 import           Development.Shake.Forward
 import           Development.Shake.FilePath
-import           GHC.Generics               (Generic)
 import           Slick
 
 import qualified Data.HashMap.Lazy as HML
 import qualified Data.Text                  as T
+
+import Types
 
 ---Config-----------------------------------------------------------------------
 
@@ -42,44 +40,6 @@ withSiteMeta (Object obj) = Object $ HML.union obj siteMetaObj
   where
     Object siteMetaObj = toJSON siteMeta
 withSiteMeta _ = error "only add site meta to objects"
-
-data SiteMeta =
-    SiteMeta { siteAuthor    :: String
-             , baseUrl       :: String -- e.g. https://example.ca
-             , siteTitle     :: String
-             , twitterHandle :: Maybe String -- Without @
-             , githubUser    :: Maybe String
-             }
-    deriving (Generic, Eq, Ord, Show, ToJSON)
-
--- | Data for the index page
-data IndexInfo =
-  IndexInfo
-    { posts :: [Post]
-    } deriving (Generic, Show, FromJSON, ToJSON)
-
-type Tag = String
-
--- | Data for a blog post
-data Post =
-    Post { title       :: String
-         , author      :: String
-         , content     :: String
-         , url         :: String
-         , date        :: String
-         , tags        :: [Tag]
-         , description :: String
-         , image       :: Maybe String
-         }
-    deriving (Generic, Eq, Ord, Show, FromJSON, ToJSON, Binary)
-
-data AtomData =
-  AtomData { title        :: String
-           , domain       :: String
-           , author       :: String
-           , posts        :: [Post]
-           , currentTime  :: String
-           , atomUrl      :: String } deriving (Generic, ToJSON, Eq, Ord, Show)
 
 -- | given a list of posts this will build a table of contents
 buildIndex :: [Post] -> Action ()
