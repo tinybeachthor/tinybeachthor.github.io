@@ -4,9 +4,9 @@
 
 module Types where
 
-import           GHC.Generics               (Generic)
+import           GHC.Generics                   ( Generic )
 import           Data.Aeson
-import           Development.Shake.Classes  (Binary)
+import           Development.Shake.Classes      ( Binary )
 
 -- | Data for the site
 data SiteMeta =

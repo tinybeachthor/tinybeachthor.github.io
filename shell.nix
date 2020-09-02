@@ -17,6 +17,7 @@ mkShell {
     cabal-install
     (ghc.withPackages (hp: [ zlib ]))
     haskellPackages.ghcide
+    haskellPackages.brittany
 
     miniserve
   ];
