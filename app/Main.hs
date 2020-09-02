@@ -45,7 +45,7 @@ buildIndex posts' = do
 -- | Find and build all posts
 buildPosts :: Action [Post]
 buildPosts = do
-  pPaths <- getDirectoryFiles "." ["site/posts//*.md"]
+  pPaths <- getDirectoryFiles "." ["posts//*.md"]
   forP pPaths buildPost
 
 -- | Load a post, process metadata, write it to output, then return the post object
