@@ -29,7 +29,8 @@ withSiteMeta _ _ = error "only add site meta to objects"
 data IndexInfo =
   IndexInfo
     { posts :: [Post]
-    } deriving (Generic, Show, FromJSON, ToJSON)
+    }
+  deriving (Generic, Show, FromJSON, ToJSON)
 
 type Tag = String
 
@@ -45,13 +46,3 @@ data Post =
          , image       :: Maybe String
          }
     deriving (Generic, Eq, Ord, Show, FromJSON, ToJSON, Binary)
-
--- | Data for atom feed
-data AtomData =
-  AtomData { title        :: String
-           , domain       :: String
-           , author       :: String
-           , posts        :: [Post]
-           , currentTime  :: String
-           , atomUrl      :: String } deriving (Generic, ToJSON, Eq, Ord, Show)
-

@@ -8,7 +8,6 @@ import           Control.Lens
 import           Control.Monad
 import           Data.Aeson
 import           Data.Aeson.Lens
-import           Data.Time
 import           Development.Shake
 import           Development.Shake.Forward
 import           Development.Shake.FilePath
@@ -17,6 +16,8 @@ import           Slick
 import qualified Data.Text                     as T
 
 import           Types
+
+import qualified Feed.Atom
 
 ---Config-----------------------------------------------------------------------
 
@@ -70,39 +71,13 @@ copyStaticFiles = do
   void $ forP filepaths $ \filepath ->
     copyFileChanged ("site" </> filepath) (outputFolder </> filepath)
 
-formatDate :: String -> String
-formatDate humanDate = toIsoDate parsedTime
-  where parsedTime = parseTimeOrError True defaultTimeLocale "%b %e, %Y" humanDate :: UTCTime
-
-rfc3339 :: Maybe String
-rfc3339 = Just "%H:%M:SZ"
-
-toIsoDate :: UTCTime -> String
-toIsoDate = formatTime defaultTimeLocale (iso8601DateFormat rfc3339)
-
-buildFeed :: [Post] -> Action ()
-buildFeed posts = do
-  now <- liftIO getCurrentTime
-  let atomData = AtomData { title       = siteTitle siteMeta
-                          , domain      = baseUrl siteMeta
-                          , author      = siteAuthor siteMeta
-                          , posts       = mkAtomPost <$> posts
-                          , currentTime = toIsoDate now
-                          , atomUrl     = "/atom.xml"
-                          }
-  atomTempl <- compileTemplate' "site/templates/atom.xml"
-  writeFile' (outputFolder </> "atom.xml") . T.unpack $ substitute atomTempl (toJSON atomData)
- where
-  mkAtomPost :: Post -> Post
-  mkAtomPost p = p { date = formatDate $ date p }
-
 -- | Specific build rules for the Shake system
 --   defines workflow to build the website
 buildRules :: Action ()
 buildRules = do
   allPosts <- buildPosts
   buildIndex allPosts
-  buildFeed allPosts
+  Feed.Atom.build allPosts siteMeta "site/templates/atom.xml" outputFolder
   copyStaticFiles
 
 main :: IO ()
