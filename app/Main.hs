@@ -14,7 +14,6 @@ import           Development.Shake.Forward
 import           Development.Shake.FilePath
 import           Slick
 
-import qualified Data.HashMap.Lazy             as HML
 import qualified Data.Text                     as T
 
 import           Types
@@ -32,19 +31,14 @@ siteMeta = SiteMeta { siteAuthor    = "Me"
 outputFolder :: FilePath
 outputFolder = "docs/"
 
---Data models-------------------------------------------------------------------
-
-withSiteMeta :: Value -> Value
-withSiteMeta (Object obj) = Object $ HML.union obj siteMetaObj
-  where Object siteMetaObj = toJSON siteMeta
-withSiteMeta _ = error "only add site meta to objects"
+---Build------------------------------------------------------------------------
 
 -- | given a list of posts this will build a table of contents
 buildIndex :: [Post] -> Action ()
 buildIndex posts' = do
   indexT <- compileTemplate' "site/templates/index.html"
   let indexInfo = IndexInfo { posts = posts' }
-      indexHTML = T.unpack $ substitute indexT (withSiteMeta $ toJSON indexInfo)
+      indexHTML = T.unpack $ substitute indexT (withSiteMeta siteMeta $ toJSON indexInfo)
   writeFile' (outputFolder </> "index.html") indexHTML
 
 -- | Find and build all posts
@@ -64,7 +58,7 @@ buildPost srcPath = cacheAction ("build" :: T.Text, srcPath) $ do
   let postUrl     = T.pack . dropDirectory1 $ srcPath -<.> "html"
       withPostUrl = _Object . at "url" ?~ String postUrl
   -- Add additional metadata we've been able to compute
-  let fullPostData = withSiteMeta . withPostUrl $ postData
+  let fullPostData = (withSiteMeta siteMeta) . withPostUrl $ postData
   template <- compileTemplate' "site/templates/post.html"
   writeFile' (outputFolder </> T.unpack postUrl) . T.unpack $ substitute template fullPostData
   convert fullPostData

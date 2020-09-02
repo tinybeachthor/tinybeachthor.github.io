@@ -8,6 +8,8 @@ import           GHC.Generics                   ( Generic )
 import           Data.Aeson
 import           Development.Shake.Classes      ( Binary )
 
+import qualified Data.HashMap.Lazy             as HML
+
 -- | Data for the site
 data SiteMeta =
     SiteMeta { siteAuthor    :: String
@@ -17,6 +19,11 @@ data SiteMeta =
              , githubUser    :: Maybe String
              }
     deriving (Generic, Eq, Ord, Show, ToJSON)
+
+withSiteMeta :: SiteMeta -> Value -> Value
+withSiteMeta siteMeta (Object obj) = Object $ HML.union obj siteMetaObj
+  where Object siteMetaObj = toJSON siteMeta
+withSiteMeta _ _ = error "only add site meta to objects"
 
 -- | Data for the index page
 data IndexInfo =
