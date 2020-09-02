@@ -9,11 +9,6 @@ with import sources.nixpkgs {
   config = { };
 };
 
-mkShell {
-  buildInputs = [
-    git
-
-    cabal-install
-    (ghc.withPackages (hp: [ zlib ]))
-  ];
+haskell.packages.ghc883.callPackage ./blog.nix {
+  inherit zlib;
 }
