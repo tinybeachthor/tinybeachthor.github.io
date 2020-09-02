@@ -12,5 +12,8 @@ with import sources.nixpkgs {
 mkShell {
   buildInputs = [
     git
+
+    cabal-install
+    ghc
   ];
 }
