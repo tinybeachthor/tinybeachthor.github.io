@@ -12,8 +12,11 @@ with import sources.nixpkgs {
 mkShell {
   buildInputs = [
     git
+    gnumake
 
     cabal-install
     (ghc.withPackages (hp: [ zlib ]))
+
+    miniserve
   ];
 }
