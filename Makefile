@@ -1,7 +1,6 @@
 all: compile build
 
 build: result
-	rm -rf docs/*
 	./result/bin/blog4
 .PHONY: build
 
@@ -9,9 +8,10 @@ compile: clean result
 .PHONY: compile
 clean:
 	rm -f result
+	rm -rf .shake
+	rm -rf docs/*
 .PHONY: clean
 result:
-	rm -rf .shake
 	nix-build
 
 serve:
