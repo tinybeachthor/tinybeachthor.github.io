@@ -12,7 +12,7 @@ clean:
 	rm -rf docs/*
 .PHONY: clean
 result:
-	nix-build
+	nix-build | cachix push tinybeachthor
 
 serve:
 	miniserve docs
