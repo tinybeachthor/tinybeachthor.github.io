@@ -32,13 +32,20 @@ body {
 body.index {
   display: grid;
   grid-template:
-    "header aside"
+    "header header"
     "main   aside"
     / auto min-content;
 }
 
 header {
+  grid-area: header;
   margin: 0 0 1rem 0;
+}
+main {
+  grid-area: main;
+}
+aside {
+  grid-area: aside;
 }
 
 h1 {
