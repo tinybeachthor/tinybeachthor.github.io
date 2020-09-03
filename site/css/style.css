@@ -43,8 +43,9 @@ h1 {
 }
 
 h2 {
-  font-size: 3.0rem;
+  font-size: 2.6rem;
   font-family: sans-serif;
+  text-decoration: underline;
 
   margin: 0 0 1rem 0;
 }
@@ -54,11 +55,10 @@ ul.post-list {
 }
 ul.post-list > li {
   list-style: none;
+  border: solid 2px blue;
   margin: 0 0 1rem 0;
-}
-ul.post-list > li:nth-child(odd) {
-  background: lightyellow;
-}
-ul.post-list > li:nth-child(even) {
-  background: lightcyan;
+  padding: 2px;
+  display: inline-block;
+  float: left;
+  clear: both;
 }
