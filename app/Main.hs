@@ -79,6 +79,7 @@ buildRules = do
   buildIndex allPosts
   Feed.Atom.build allPosts siteMeta "site/templates/atom.xml" outputFolder
   copyStaticFiles
+  writeFile' (outputFolder </> ".nojekyll") ""
 
 main :: IO ()
 main = do
