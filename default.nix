@@ -9,6 +9,6 @@ with import sources.nixpkgs {
   config = { };
 };
 
-haskell.packages.ghc883.callPackage ./blog.nix {
+haskell.packages.ghc883.callPackage ./blog4.nix {
   inherit zlib;
 }
