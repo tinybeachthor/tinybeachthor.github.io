@@ -27,6 +27,13 @@ body {
   background: #fff;
   margin: 1rem;
 }
+body.index {
+  display: grid;
+  grid-template:
+    "header aside"
+    "main   aside"
+    / auto min-content;
+}
 
 header {
   margin: 0 0 1rem 0;
