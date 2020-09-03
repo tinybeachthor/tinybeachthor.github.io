@@ -25,7 +25,9 @@ html {
 
 body {
   background: #fff;
-  margin: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 body.index {
   display: grid;
