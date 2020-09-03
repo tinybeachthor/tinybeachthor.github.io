@@ -13,6 +13,7 @@ mkShell {
   buildInputs = [
     git
     gnumake
+    cachix
 
     cabal-install
     (ghc.withPackages (hp: [ zlib ]))
