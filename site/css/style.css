@@ -72,3 +72,14 @@ ul.post-list > li {
   float: left;
   clear: both;
 }
+
+ul.link-list {
+  font-family: sans-serif;
+}
+ul.link-list > li {
+  list-style: none;
+  margin: 0 0 1rem 0;
+  display: inline-block;
+  float: left;
+  clear: both;
+}
