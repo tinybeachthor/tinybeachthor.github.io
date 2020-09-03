@@ -1,0 +1,92 @@
+/* CSS Reset */
+html, body, div, span, object, h1, h2, h3, h4, h5, h6, p, a, abbr, acronym, em, img, ol, ul, li {
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Styles */
+html {
+  background: #fff;
+  color: #000;
+  font-size: 110%;
+}
+
+body {
+  background: #fff;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+body.index {
+  display: grid;
+  grid-template:
+    "header header"
+    "main   aside"
+    / auto min-content;
+}
+
+header {
+  grid-area: header;
+  margin: 0 0 1rem 0;
+}
+main {
+  grid-area: main;
+}
+aside {
+  grid-area: aside;
+}
+
+h1 {
+  background: #98ddfc;
+  color: #fff;
+  font-size: 3.5rem;
+  font-family: sans-serif;
+  text-transform: uppercase;
+
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+h2 {
+  font-size: 2.6rem;
+  font-family: sans-serif;
+  text-decoration: underline;
+
+  margin: 0 0 1rem 0;
+}
+
+ul.post-list {
+  font-size: 110%;
+}
+ul.post-list > li {
+  list-style: none;
+  border: solid 2px blue;
+  margin: 0 0 1rem 0;
+  padding: 2px;
+  display: inline-block;
+  float: left;
+  clear: both;
+}
+
+ul.link-list {
+  font-family: sans-serif;
+}
+ul.link-list > li {
+  list-style: none;
+  margin: 0 0 1rem 0;
+  display: inline-block;
+  float: left;
+  clear: both;
+}
