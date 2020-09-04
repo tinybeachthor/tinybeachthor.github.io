@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head profile="http://www.w3.org/2005/10/profile">
-    <meta charset="UTF-8">
-    <meta name="description" content="{{siteTitle}}">
-    <meta name="author" content="{{author}}">
-    <meta name=viewport content="width=device-width, initial-scale=1">
+  {{>site/templates/meta.html}}
 
-    <meta name="twitter:card" content="summary_large_image">
-    {{#twitterHandle}}
-    <meta name="twitter:site" content="@{{twitterHandle}}">
-    <meta name="twitter:creator" content="@{{twitterHandle}}">
-    {{/twitterHandle}}
-    <meta name="twitter:title" content="{{title}}">
-    <meta name="twitter:description" content="{{description}}">
-    {{#image}}
-    <meta name="twitter:image" content="{{baseUrl}}/images/{{image}}">
-    {{/image}}
+  <meta name="twitter:card" content="summary_large_image">
+  {{#twitterHandle}}
+  <meta name="twitter:site" content="@{{twitterHandle}}">
+  <meta name="twitter:creator" content="@{{twitterHandle}}">
+  {{/twitterHandle}}
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  {{#image}}
+  <meta name="twitter:image" content="{{baseUrl}}/images/{{image}}">
+  {{/image}}
 
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/syntax.css">
 </head>
 <body>
 
