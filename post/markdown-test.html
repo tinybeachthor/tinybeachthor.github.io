@@ -1,21 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>My Slick Site</title>
-  <link href="https://example.com/atom.xml" rel="self" type="application/rss+xml" />
-  <updated>2020-09-04T13:45:59Z</updated>
-  <author>
-      <name>Me</name>
-  </author>
-  <id>https://example.com/</id>
+<!DOCTYPE html>
+<html lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+    <meta charset="UTF-8">
+    <meta name="description" content="My Slick Site">
+    <meta name="author" content="Me">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@myslickhandle">
+<meta name="twitter:creator" content="@myslickhandle">
+<meta name="twitter:title" content="Markdown Test">
+    <meta name="twitter:description" content="Test file for markdown element rendering">
+        <title>Markdown Test</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+<body>
 
-  <entry>
-      <title>Markdown Test</title>
-      <link href="https://example.com/post/markdown-test.html"/>
-      <id>https://example.com/post/markdown-test.html</id>
-      <updated>2020-09-02T00:00:00Z</updated>
-      <category term="test"/>
-      <summary>Test file for markdown element rendering</summary>
-      <content type="html"><![CDATA[<h1 id="markdown-syntax">Markdown: Syntax</h1>
+<div id="page">
+    <div class="wrapper">
+        <div class="masthead">
+            <span class="title">
+                Markdown Test
+            </span>
+            <br>
+
+            <br>
+            <span class="byline">by Me</span>
+            <br>
+            <span class="date">Sep 2, 2020</span>
+            <br>
+            <div class="metadata">
+            </div>
+            <div class="tags">
+              <span class="tag test">test</span>
+            </div>
+        </div>
+    </div>
+    <article class="post">
+        <h1 id="markdown-syntax">Markdown: Syntax</h1>
 <ul>
 <li><a href="#overview">Overview</a>
 <ul>
@@ -205,16 +227,23 @@ end tell</code></pre>
 <p><strong>double underscores</strong></p>
 <h3 id="code">Code</h3>
 <p>To indicate a span of code, wrap it with backtick quotes (<code>`</code>). Unlike a pre-formatted code block, a code span indicates code within a normal paragraph. For example:</p>
-<p>Use the <code>printf()</code> function.</p>]]></content>
-  </entry>
-  <entry>
-      <title>Sample Post</title>
-      <link href="https://example.com/post/sample-post.html"/>
-      <id>https://example.com/post/sample-post.html</id>
-      <updated>2019-01-01T00:00:00Z</updated>
-      <category term="slick"/>
-      <category term="site"/>
-      <summary>My first blog post using slick</summary>
-      <content type="html"><![CDATA[<p>Welcome to your first blog post!</p>]]></content>
-  </entry>
-</feed>
+<p>Use the <code>printf()</code> function.</p>
+
+        <br>
+        <br>
+
+        <!--Share buttons-->
+        <div class="social-buttons">
+            <a href="https://twitter.com/share" class="twitter-share-button"
+                                                data-url="https://example.com" data-text="Check out: Markdown Test - " data-via="myslickhandle">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            <a href="https://twitter.com/myslickhandle" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @myslickhandle</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            <div class="fb-like" data-href="" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
+        </div>
+</article>
+
+</div>
+
+<body>
+</html>
