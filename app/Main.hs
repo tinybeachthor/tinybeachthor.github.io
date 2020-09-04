@@ -45,13 +45,13 @@ buildIndex posts' = do
 -- | Find and build all posts
 buildPosts :: Action [Post]
 buildPosts = do
-  pPaths <- getDirectoryFiles "." ["posts//*.md"]
+  pPaths <- getDirectoryFiles mempty ["posts//*.md"]
   forP pPaths buildPost
 
 -- | Load a post, process metadata, write it to output, then return the post object
 -- Detects changes to either post content or template
 buildPost :: FilePath -> Action Post
-buildPost srcPath = cacheAction ("build" :: T.Text, srcPath) $ do
+buildPost srcPath = cacheAction ("buildPost" :: T.Text, srcPath) $ do
   liftIO . putStrLn $ "Rebuilding post: " <> srcPath
   postContent <- readFile' srcPath
   -- load post content and metadata as JSON blob
@@ -67,7 +67,7 @@ buildPost srcPath = cacheAction ("build" :: T.Text, srcPath) $ do
 -- | Copy all static files from the listed folders to their destination
 copyStaticFiles :: Action ()
 copyStaticFiles = do
-  filepaths <- getDirectoryFiles "./site/" ["images//*", "css//*", "js//*"]
+  filepaths <- getDirectoryFiles "site" ["images//*", "css//*", "js//*"]
   void $ forP filepaths $ \filepath ->
     copyFileChanged ("site" </> filepath) (outputFolder </> filepath)
 
@@ -79,7 +79,7 @@ buildRules = do
   buildIndex allPosts
   Feed.Atom.build allPosts siteMeta "site/templates/atom.xml" outputFolder
   copyStaticFiles
-  writeFile' (outputFolder </> ".nojekyll") ""
+  writeFile' (outputFolder </> ".nojekyll") mempty
 
 main :: IO ()
 main = do
