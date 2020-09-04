@@ -5,7 +5,18 @@
     <meta name="description" content="{{siteTitle}}">
     <meta name="author" content="{{author}}">
     <meta name=viewport content="width=device-width, initial-scale=1">
-    {{>site/templates/meta-data.html}}
+
+    <meta name="twitter:card" content="summary_large_image">
+    {{#twitterHandle}}
+    <meta name="twitter:site" content="@{{twitterHandle}}">
+    <meta name="twitter:creator" content="@{{twitterHandle}}">
+    {{/twitterHandle}}
+    <meta name="twitter:title" content="{{title}}">
+    <meta name="twitter:description" content="{{description}}">
+    {{#image}}
+    <meta name="twitter:image" content="{{baseUrl}}/images/{{image}}">
+    {{/image}}
+
     <title>{{title}}</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/syntax.css">
