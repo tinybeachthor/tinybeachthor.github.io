@@ -56,12 +56,13 @@ buildPost srcPath = cacheAction ("buildPost" :: T.Text, srcPath) $ do
   postContent <- readFile' srcPath
   -- load post content and metadata as JSON blob
   postData    <- markdownToHTML . T.pack $ postContent
-  let postUrl     = T.pack . dropDirectory1 $ srcPath -<.> "html"
+  let postUrl     = T.pack . ("post" </>) . dropDirectory1 $ srcPath -<.> "html"
       withPostUrl = _Object . at "url" ?~ String postUrl
   -- Add additional metadata we've been able to compute
   let fullPostData = (withSiteMeta siteMeta) . withPostUrl $ postData
   template <- compileTemplate' "site/templates/post.html"
-  writeFile' (outputFolder </> T.unpack postUrl) . T.unpack $ substitute template fullPostData
+  writeFile' (outputFolder </> T.unpack postUrl) . T.unpack $
+    substitute template fullPostData
   convert fullPostData
 
 -- | Copy all static files from the listed folders to their destination
