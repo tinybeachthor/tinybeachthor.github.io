@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveAnyClass        #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE TemplateHaskell       #-}
 
 module Feed.Atom
   ( build
@@ -12,7 +13,9 @@ import           Data.Aeson
 import           Data.Time
 import           Development.Shake
 import           Development.Shake.FilePath
-import           Slick
+import           Text.Mustache.Compile          ( embedSingleTemplate )
+import           Text.Mustache.Render           ( substitute )
+import           Text.Mustache.Types            ( Template )
 
 import qualified Data.Text                     as T
 
@@ -28,8 +31,11 @@ data AtomData =
            }
   deriving (Generic, ToJSON, Eq, Ord, Show)
 
-build :: [Post] -> SiteMeta -> FilePath -> FilePath -> Action ()
-build allPosts siteMeta templatePath outputFolder = do
+atomTemplate :: Template
+atomTemplate = $(embedSingleTemplate "app/Feed/atom.xml")
+
+build :: [Post] -> SiteMeta -> FilePath -> Action ()
+build allPosts siteMeta outputFolder = do
   now <- liftIO getCurrentTime
   let atomData = AtomData { title       = siteTitle siteMeta
                           , domain      = baseUrl siteMeta
@@ -38,8 +44,8 @@ build allPosts siteMeta templatePath outputFolder = do
                           , currentTime = toIsoDate now
                           , atomUrl     = "/atom.xml"
                           }
-  atomTempl <- compileTemplate' templatePath
-  writeFile' (outputFolder </> "atom.xml") . T.unpack $ substitute atomTempl (toJSON atomData)
+  let rendered = substitute atomTemplate (toJSON atomData)
+  writeFile' (outputFolder </> "atom.xml") . T.unpack $ rendered
  where
   mkAtomPost :: Post -> Post
   mkAtomPost p = p { date = formatDate $ date p }

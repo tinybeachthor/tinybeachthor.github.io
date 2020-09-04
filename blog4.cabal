@@ -28,6 +28,7 @@ executable blog4
     , containers
     , lens
     , lens-aeson
+    , mustache
     , shake
     , slick
     , text

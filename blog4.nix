@@ -1,5 +1,5 @@
-{ mkDerivation, aeson, base, containers, lens, lens-aeson, shake
-, slick, stdenv, text, time, unordered-containers, zlib
+{ mkDerivation, aeson, base, containers, lens, lens-aeson, mustache
+, shake, slick, stdenv, text, time, unordered-containers, zlib
 }:
 mkDerivation {
   pname = "blog4";
@@ -8,9 +8,10 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    aeson base containers lens lens-aeson shake slick text time
-    unordered-containers
+    aeson base containers lens lens-aeson mustache shake slick text
+    time unordered-containers
   ];
   executablePkgconfigDepends = [ zlib ];
   license = "unknown";
+  hydraPlatforms = stdenv.lib.platforms.none;
 }

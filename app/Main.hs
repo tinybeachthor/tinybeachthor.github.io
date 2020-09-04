@@ -77,7 +77,7 @@ buildRules :: Action ()
 buildRules = do
   allPosts <- buildPosts
   buildIndex allPosts
-  Feed.Atom.build allPosts siteMeta "site/templates/atom.xml" outputFolder
+  Feed.Atom.build allPosts siteMeta outputFolder
   copyStaticFiles
   writeFile' (outputFolder </> ".nojekyll") mempty
 

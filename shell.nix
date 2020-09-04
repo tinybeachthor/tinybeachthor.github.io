@@ -14,6 +14,7 @@ mkShell {
     git
     gnumake
     cachix
+    cabal2nix
 
     cabal-install
     (ghc.withPackages (hp: [ zlib ]))
