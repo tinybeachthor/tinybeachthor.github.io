@@ -21,6 +21,6 @@ mkShell {
     haskellPackages.ghcide
     haskellPackages.brittany
 
-    miniserve
+    nodePackages.serve
   ];
 }

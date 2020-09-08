@@ -15,7 +15,7 @@ result:
 	nix-build | cachix push tinybeachthor
 
 serve:
-	miniserve docs
+	serve --no-clipboard docs
 .PHONY: serve
 
 FORMAT_CMD=brittany --indent=2 --columns=100 --write-mode=inplace
