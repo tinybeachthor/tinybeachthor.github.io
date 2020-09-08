@@ -1,22 +1,12 @@
-/* CSS Reset */
-html, body, div, span, object, h1, h2, h3, h4, h5, h6, p, a, abbr, acronym, em, img, ol, ul, li {
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-  margin: 0;
-  padding: 0;
-}
 html {
   box-sizing: border-box;
+  border: 0;
 }
 *, *:before, *:after {
   box-sizing: inherit;
+  border: 0;
 }
 
-/* Styles */
 html {
   background: #fff;
   color: #000;
@@ -26,24 +16,44 @@ html {
   height: 100%;
 }
 
+header *,
+main *,
+aside *,
+footer * {
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #fff;
 
-  max-width: 1000px;
   width: 100%;
   height: 100%;
   padding: 1rem;
   margin: 0 auto;
-
+  display: grid;
   overflow: hidden auto;
 }
 body.index {
-  display: grid;
+  max-width: 1000px;
   grid-template:
     "header header"   min-content
     "main   aside"    auto
     "footer footer"   min-content
     / auto min-content;
+}
+body.post {
+  max-width: 800px;
+  grid-template:
+    "header"   min-content
+    "main"     auto
+    "footer"   min-content
+    / 100%;
 }
 
 header {
@@ -61,10 +71,26 @@ footer {
   margin: 1rem 0 0 0;
 }
 
+article {
+  font-size: 125%;
+  font-family: medium-content-serif-font, serif;
+  font-weight: 100;
+  color: #1e1e1e;
+}
+article strong {
+  font-weight: 900;
+}
+article code {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  white-space: pre-wrap;
+}
+
 h1 {
   background: #98ddfc;
   color: #fff;
-  font-size: 3.5rem;
+  font-size: min(4.5rem, 11.5vw);
   font-family: sans-serif;
   text-transform: uppercase;
 
