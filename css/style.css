@@ -116,6 +116,18 @@ ul.post-list > li {
   float: left;
   clear: both;
 }
+ul.post-list > li > a {
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+}
+ul.post-list > li span,
+ul.post-list > li span:visited {
+  color: black;
+}
+ul.post-list > li p {
+  text-decoration: underline;
+}
 
 ul.link-list {
   font-family: sans-serif;
