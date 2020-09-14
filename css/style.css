@@ -47,6 +47,10 @@ body.index {
     "footer footer"   min-content
     / auto min-content;
 }
+body.index > main > :first-child {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+}
 body.post {
   max-width: 800px;
   grid-template:
@@ -60,6 +64,19 @@ header {
   grid-area: header;
   margin: 0 0 1rem 0;
 }
+header > :first-child {
+  background: #98ddfc;
+  color: #fff;
+  font-size: 4.5rem;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
 main {
   grid-area: main;
 }
@@ -72,7 +89,7 @@ footer {
 }
 
 article {
-  font-size: 125%;
+  font-size: 110%;
   font-family: medium-content-serif-font, serif;
   font-weight: 100;
   color: #1e1e1e;
@@ -85,25 +102,6 @@ article code {
   display: inline-block;
   max-width: 100%;
   white-space: pre-wrap;
-}
-
-h1 {
-  background: #98ddfc;
-  color: #fff;
-  font-size: min(4.5rem, 11.5vw);
-  font-family: sans-serif;
-  text-transform: uppercase;
-
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
-h2 {
-  font-size: 2.6rem;
-  font-family: sans-serif;
-  text-decoration: underline;
-
-  margin: 0 0 1rem 0;
 }
 
 ul.post-list {

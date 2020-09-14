@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>My Slick Site</title>
-  <link href="https://example.com/atom.xml" rel="self" type="application/rss+xml" />
-  <updated>2020-09-08T15:32:37Z</updated>
+  <title>OBSERVATIONS</title>
+  <link href="https://tinybeachthor.github.io/atom.xml" rel="self" type="application/rss+xml" />
+  <updated>2020-09-14T13:32:46Z</updated>
   <author>
-      <name>Me</name>
+      <name>Martin Toman</name>
   </author>
-  <id>https://example.com/</id>
+  <id>https://tinybeachthor.github.io/</id>
 
   <entry>
       <title>Markdown Test</title>
-      <link href="https://example.com/post/markdown-test.html"/>
-      <id>https://example.com/post/markdown-test.html</id>
+      <link href="https://tinybeachthor.github.io/post/markdown-test.html"/>
+      <id>https://tinybeachthor.github.io/post/markdown-test.html</id>
       <updated>2020-09-02T00:00:00Z</updated>
       <category term="test"/>
       <summary>Test file for markdown element rendering</summary>
@@ -209,8 +209,8 @@ end tell</code></pre>
   </entry>
   <entry>
       <title>Sample Post</title>
-      <link href="https://example.com/post/sample-post.html"/>
-      <id>https://example.com/post/sample-post.html</id>
+      <link href="https://tinybeachthor.github.io/post/sample-post.html"/>
+      <id>https://tinybeachthor.github.io/post/sample-post.html</id>
       <updated>2019-01-01T00:00:00Z</updated>
       <category term="slick"/>
       <category term="site"/>
