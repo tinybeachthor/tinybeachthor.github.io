@@ -12,12 +12,13 @@ import qualified Data.HashMap.Lazy             as HML
 
 -- | Data for the site
 data SiteMeta =
-    SiteMeta { siteAuthor    :: String
-             , baseUrl       :: String -- e.g. https://example.ca
-             , siteTitle     :: String
-             , authorEmail   :: Maybe String
-             , twitterHandle :: Maybe String -- Without @
-             , githubUser    :: Maybe String
+    SiteMeta { siteAuthor      :: String
+             , baseUrl         :: String -- e.g. https://example.ca
+             , siteTitle       :: String
+             , siteDescription :: String
+             , authorEmail     :: Maybe String
+             , twitterHandle   :: Maybe String -- Without @
+             , githubUser      :: Maybe String
              }
     deriving (Generic, Eq, Ord, Show, ToJSON)
 

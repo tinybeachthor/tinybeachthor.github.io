@@ -23,12 +23,13 @@ import qualified Feed.RSS
 ---Config-----------------------------------------------------------------------
 
 siteMeta :: SiteMeta
-siteMeta = SiteMeta { siteAuthor    = "Martin Toman"
-                    , baseUrl       = "https://tinybeachthor.github.io"
-                    , siteTitle     = "OBSERVATIONS"
-                    , authorEmail   = Just "toman.martin@live.com"
-                    , twitterHandle = Just "tinybeachthor"
-                    , githubUser    = Just "tinybeachthor"
+siteMeta = SiteMeta { siteAuthor      = "Martin Toman"
+                    , baseUrl         = "https://tinybeachthor.github.io"
+                    , siteTitle       = "OBSERVATIONS"
+                    , siteDescription = "random walk through time and space"
+                    , authorEmail     = Just "toman.martin@live.com"
+                    , twitterHandle   = Just "tinybeachthor"
+                    , githubUser      = Just "tinybeachthor"
                     }
 
 outputFolder :: FilePath

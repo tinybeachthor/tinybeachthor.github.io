@@ -23,9 +23,11 @@ import Types
 
 data RSSData =
   RSSData { title        :: String
+          , description  :: String
           , domain       :: String
           , posts        :: [Post]
           , currentTime  :: String
+          , rssUrl       :: String
           }
   deriving (Generic, ToJSON, Eq, Ord, Show)
 
@@ -36,9 +38,11 @@ build :: [Post] -> SiteMeta -> FilePath -> Action ()
 build allPosts siteMeta outputFolder = do
   now <- liftIO getCurrentTime
   let rssData = RSSData { title       = siteTitle siteMeta
+                        , description = siteDescription siteMeta
                         , domain      = baseUrl siteMeta
                         , posts       = mkAtomPost <$> allPosts
                         , currentTime = toIsoDate now
+                        , rssUrl      = "/rss.xml"
                         }
   let rendered = substitute rssTemplate (toJSON rssData)
   writeFile' (outputFolder </> "rss.xml") . T.unpack $ rendered
@@ -50,8 +54,9 @@ formatDate :: String -> String
 formatDate humanDate = toIsoDate parsedTime
   where parsedTime = parseTimeOrError True defaultTimeLocale "%b %e, %Y" humanDate :: UTCTime
 
-rfc3339 :: Maybe String
-rfc3339 = Just "%H:%M:%SZ"
-
 toIsoDate :: UTCTime -> String
-toIsoDate = formatTime defaultTimeLocale (iso8601DateFormat rfc3339)
+toIsoDate = formatTime defaultTimeLocale rfc822
+
+-- | Use numeric timezone offset to avoid issues with UTC/UT
+rfc822 :: String
+rfc822 = "%a, %d %b %Y %H:%M:%S %z"
