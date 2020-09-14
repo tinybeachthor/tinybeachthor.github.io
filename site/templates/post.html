@@ -23,21 +23,14 @@
   <header>
     <a href="{{baseUrl}}"><h1>Observations</h1></a>
 
-    {{#image}}
-    <img class="post-image" src="/images/{{image}}">
-    {{/image}}
+    <p class="title">
+      {{title}}
+    </p>
+    <p class="date">{{date}}</p>
     <br>
-    {{#author}}
-    <span class="byline">by {{author}}</span>
-    {{/author}}
-    <br>
-    <span class="date">{{date}}</span>
-    <br>
-    <div class="metadata">
-    </div>
     <div class="tags">
       {{#tags}}
-      <span class="tag {{.}}">{{.}}</span>
+      <span>#{{.}}</span>
       {{/tags}}
     </div>
   </header>
