@@ -18,6 +18,7 @@ import qualified Data.Text                     as T
 import           Types
 
 import qualified Feed.Atom
+import qualified Feed.RSS
 
 ---Config-----------------------------------------------------------------------
 
@@ -80,6 +81,7 @@ buildRules = do
   allPosts <- buildPosts
   buildIndex allPosts
   Feed.Atom.build allPosts siteMeta outputFolder
+  Feed.RSS.build  allPosts siteMeta outputFolder
   copyStaticFiles
   writeFile' (outputFolder </> ".nojekyll") mempty
 
