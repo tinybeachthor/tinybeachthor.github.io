@@ -22,11 +22,12 @@ import qualified Feed.Atom
 ---Config-----------------------------------------------------------------------
 
 siteMeta :: SiteMeta
-siteMeta = SiteMeta { siteAuthor    = "Me"
-                    , baseUrl       = "https://example.com"
-                    , siteTitle     = "My Slick Site"
-                    , twitterHandle = Just "myslickhandle"
-                    , githubUser    = Just "myslickgithubuser"
+siteMeta = SiteMeta { siteAuthor    = "Martin Toman"
+                    , baseUrl       = "https://tinybeachthor.github.io"
+                    , siteTitle     = "OBSERVATIONS"
+                    , authorEmail   = Just "toman.martin@live.com"
+                    , twitterHandle = Just "tinybeachthor"
+                    , githubUser    = Just "tinybeachthor"
                     }
 
 outputFolder :: FilePath

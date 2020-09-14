@@ -15,6 +15,7 @@ data SiteMeta =
     SiteMeta { siteAuthor    :: String
              , baseUrl       :: String -- e.g. https://example.ca
              , siteTitle     :: String
+             , authorEmail   :: Maybe String
              , twitterHandle :: Maybe String -- Without @
              , githubUser    :: Maybe String
              }
