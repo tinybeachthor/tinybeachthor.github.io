@@ -11,7 +11,6 @@ import           Data.Aeson.Lens
 import           Development.Shake
 import           Development.Shake.Forward
 import           Development.Shake.FilePath
-import           Slick
 
 import qualified Data.Text                     as T
 

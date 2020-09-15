@@ -4,11 +4,12 @@ my blog
 
 ## how it works
 
-Based upon [slick](https://github.com/ChrisPenner/slick) static site generator using the [shake build system](https://shakebuild.com/).
+Inspired by [slick](https://github.com/ChrisPenner/slick) static site generator.
+
+Uses the [shake build system](https://shakebuild.com/).
+Renders markdown files into a static webpage and generates syndication feeds.
 
 Reproducibly built using [nix](https://nixos.org/). And cached with [cachix](https://cachix.org/).
-
-Renders markdown files into a static webpage and generates syndication feeds.
 
 Automated CI deployment to Github Pages (using Github Action).
 

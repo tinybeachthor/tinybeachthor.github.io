@@ -30,7 +30,6 @@ executable blog4
     , lens-aeson
     , mustache
     , shake
-    , slick
     , text
     , time
     , unordered-containers
