@@ -35,6 +35,7 @@ executable blog4
     , unordered-containers
   other-modules:
       Types
+    , Utils
     , Feed.Atom
     , Feed.RSS
   pkgconfig-depends:
