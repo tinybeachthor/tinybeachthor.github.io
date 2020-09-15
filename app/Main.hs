@@ -16,7 +16,7 @@ import           Text.Mustache.Render           ( substitute )
 import qualified Data.Text                     as T
 
 import           Types
-import           Utils
+import           Utils (convert, compileTemplate)
 
 import qualified Feed.Atom
 import qualified Feed.RSS
@@ -41,7 +41,7 @@ outputFolder = "docs/"
 -- | given a list of posts this will build a table of contents
 buildIndex :: [Post] -> Action ()
 buildIndex posts' = do
-  indexT <- compileTemplate' "site/templates/index.html"
+  indexT <- compileTemplate "site/templates/index.html"
   let indexInfo = IndexInfo { posts = posts' }
       indexHTML = T.unpack $ substitute indexT (withSiteMeta siteMeta $ toJSON indexInfo)
   writeFile' (outputFolder </> "index.html") indexHTML
@@ -64,9 +64,8 @@ buildPost srcPath = cacheAction ("buildPost" :: T.Text, srcPath) $ do
       withPostUrl = _Object . at "url" ?~ String postUrl
   -- Add additional metadata we've been able to compute
   let fullPostData = (withSiteMeta siteMeta) . withPostUrl $ postData
-  template <- compileTemplate' "site/templates/post.html"
-  writeFile' (outputFolder </> T.unpack postUrl) . T.unpack $
-    substitute template fullPostData
+  template <- compileTemplate "site/templates/post.html"
+  writeFile' (outputFolder </> T.unpack postUrl) . T.unpack $ substitute template fullPostData
   convert fullPostData
 
 -- | Copy all static files from the listed folders to their destination
