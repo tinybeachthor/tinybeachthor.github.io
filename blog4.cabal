@@ -24,7 +24,9 @@ executable blog4
       app
   build-depends:
       aeson
+    , attoparsec
     , base
+    , cmark-gfm
     , containers
     , lens
     , lens-aeson
@@ -33,6 +35,7 @@ executable blog4
     , text
     , time
     , unordered-containers
+    , yaml
   other-modules:
       Types
     , Utils

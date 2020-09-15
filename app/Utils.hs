@@ -1,9 +1,27 @@
-module Utils where
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE OverloadedStrings   #-}
 
-import           Data.Aeson             as A
+module Utils
+  ( convert
+  , compileTemplate
+  , markdownToHTML
+  )
+where
+
+import           CMarkGFM                       ( commonmarkToHtml )
+import           Data.Aeson                    as A
+import           Data.Attoparsec.Text
+import           Data.Text.Encoding             ( encodeUtf8 )
+import           Data.Yaml                      ( decodeEither' )
 import           Development.Shake
-import           Text.Mustache
-import           Text.Mustache.Compile  (getPartials)
+import           Text.Mustache                  ( Template
+                                                , ast
+                                                )
+import           Text.Mustache.Compile          ( getPartials
+                                                , localAutomaticCompile
+                                                )
+
+import qualified Data.Text                     as T
 
 convert :: (FromJSON a) => Value -> Action a
 convert v = case fromJSON (toJSON v) of
@@ -19,3 +37,37 @@ compileTemplate fp = do
       need . getPartials . ast $ template
       return template
     Left err -> fail $ show err
+
+-- | Convert markdown into a 'Value';
+--
+--   The 'Value' will have a "content" key containing rendered HTML.
+--   It will also include any metadata present in the markdown header.
+--
+markdownToHTML :: T.Text -> Action Value
+markdownToHTML input = do
+  docs <- splitMetadata input
+  case docs of
+    (meta, content) -> do
+      let html = commonmarkToHtml [] [] content
+      return $ A.object [("content", String html)]
+    _ -> fail $ "markdownToHTML : wrong input format, expected [content] or [meta, content]"
+
+splitMetadata :: T.Text -> Action (Value, T.Text)
+splitMetadata input = case parseOnly parser input of
+  Left  err    -> fail $ err
+  Right parsed -> return parsed
+ where
+
+  separator  = (string "---" *> endOfLine)
+
+  metaParser = do
+    separator
+    header <- T.pack <$> manyTill anyChar separator
+    return $ case decodeEither' (encodeUtf8 header) of
+      Left  err    -> Null
+      Right parsed -> parsed
+
+  parser = do
+    meta    <- option Null metaParser
+    content <- takeText
+    return (meta, content)

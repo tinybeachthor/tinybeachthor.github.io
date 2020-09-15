@@ -1,5 +1,6 @@
-{ mkDerivation, aeson, base, containers, lens, lens-aeson, mustache
-, shake, stdenv, text, time, unordered-containers, zlib
+{ mkDerivation, aeson, attoparsec, base, cmark-gfm, containers
+, lens, lens-aeson, mustache, shake, stdenv, text, time
+, unordered-containers, yaml, zlib
 }:
 mkDerivation {
   pname = "blog4";
@@ -8,8 +9,8 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    aeson base containers lens lens-aeson mustache shake text time
-    unordered-containers
+    aeson attoparsec base cmark-gfm containers lens lens-aeson mustache
+    shake text time unordered-containers yaml
   ];
   executablePkgconfigDepends = [ zlib ];
   license = "unknown";
