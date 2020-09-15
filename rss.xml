@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>OBSERVATIONS</title>
-  <link href="https://tinybeachthor.github.io/atom.xml" rel="self" type="application/rss+xml" />
-  <updated>2020-09-15T11:26:33Z</updated>
-  <author>
-      <name>Martin Toman</name>
-  </author>
-  <id>https://tinybeachthor.github.io/</id>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="https://tinybeachthor.github.io/rss.xml" rel="self" type="application/rss+xml" />
 
-  <entry>
+    <title>OBSERVATIONS</title>
+    <description>random walk through time and space</description>
+    <link>https://tinybeachthor.github.io</link>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Sep 2020 11:26:33 +0000</lastBuildDate>
+    <ttl>1800</ttl>
+
+    <item>
       <title>Markdown Test</title>
-      <link href="https://tinybeachthor.github.io/post/markdown-test.html"/>
-      <id>https://tinybeachthor.github.io/post/markdown-test.html</id>
-      <updated>2020-09-02T00:00:00Z</updated>
-      <category term="test"/>
-      <summary>Test file for markdown element rendering</summary>
-      <content type="html"><![CDATA[<h1 id="markdown-syntax">Markdown: Syntax</h1>
+      <pubDate>Wed, 02 Sep 2020 00:00:00 +0000</pubDate>
+      <link>https://tinybeachthor.github.io/post/markdown-test.html</link>
+      <guid>https://tinybeachthor.github.io/post/markdown-test.html</guid>
+      <description><![CDATA[<h1 id="markdown-syntax">Markdown: Syntax</h1>
 <ul>
 <li><a href="#overview">Overview</a>
 <ul>
@@ -199,16 +199,15 @@ end tell</code></pre>
 <p><strong>double underscores</strong></p>
 <h3 id="code">Code</h3>
 <p>To indicate a span of code, wrap it with backtick quotes (<code>`</code>). Unlike a pre-formatted code block, a code span indicates code within a normal paragraph. For example:</p>
-<p>Use the <code>printf()</code> function.</p>]]></content>
-  </entry>
-  <entry>
+<p>Use the <code>printf()</code> function.</p>]]></description>
+    </item>
+    <item>
       <title>Sample Post</title>
-      <link href="https://tinybeachthor.github.io/post/sample-post.html"/>
-      <id>https://tinybeachthor.github.io/post/sample-post.html</id>
-      <updated>2019-01-01T00:00:00Z</updated>
-      <category term="slick"/>
-      <category term="site"/>
-      <summary>My first blog post using slick</summary>
-      <content type="html"><![CDATA[<p>Welcome to your first blog post!</p>]]></content>
-  </entry>
-</feed>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      <link>https://tinybeachthor.github.io/post/sample-post.html</link>
+      <guid>https://tinybeachthor.github.io/post/sample-post.html</guid>
+      <description><![CDATA[<p>Welcome to your first blog post!</p>]]></description>
+    </item>
+
+  </channel>
+</rss>

@@ -209,16 +209,10 @@ end tell</code></pre>
     &amp;copy; 2004 Foo Corporation
 &lt;/div&gt;</code></pre>
 <p>Regular Markdown syntax is not processed within code blocks. E.g., asterisks are just literal asterisks within a code block. This means it's also easy to use Markdown to write about Markdown's own syntax.</p>
-<pre><code>tell application &quot;Foo&quot;
-    beep
-end tell</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="dt">int</span> main() {</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>   <span class="co">// printf() displays the string inside quotation</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>   printf(<span class="st">&quot;Hello, World!&quot;</span>);</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>   <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>}</span></code></pre></div>
+<p><code>tell application "Foo"     beep end tell</code></p>
+<p>```c</p>
+<h1 id="include-stdioh">include &lt;stdio.h&gt;</h1>
+<p>int main() { // printf() displays the string inside quotation printf("Hello, World!"); return 0; } ```</p>
 <h2 id="span-elements">Span Elements</h2>
 <h3 id="links">Links</h3>
 <p>Markdown supports two style of links: <em>inline</em> and <em>reference</em>.</p>
