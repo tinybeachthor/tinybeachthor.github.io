@@ -15,11 +15,11 @@ import           Text.Mustache.Render           ( substitute )
 
 import qualified Data.Text                     as T
 
-import           Types
-import           Utils                          ( convert
-                                                , compileTemplate
+import           Compile                        ( compileTemplate
                                                 , markdownToHTML
                                                 )
+import           Types
+import           Utils                          ( convert )
 
 import qualified Feed.Atom
 import qualified Feed.RSS

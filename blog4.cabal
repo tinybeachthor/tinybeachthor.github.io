@@ -37,7 +37,8 @@ executable blog4
     , unordered-containers
     , yaml
   other-modules:
-      Types
+      Compile
+    , Types
     , Utils
     , Feed.Atom
     , Feed.RSS
