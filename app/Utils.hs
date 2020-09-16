@@ -21,12 +21,18 @@ import           Text.Mustache.Compile          ( getPartials
                                                 , localAutomaticCompile
                                                 )
 
+import qualified Data.HashMap.Lazy             as HML
 import qualified Data.Text                     as T
 
 convert :: (FromJSON a) => Value -> Action a
 convert v = case fromJSON (toJSON v) of
   A.Success r   -> pure r
   A.Error   err -> fail $ "convert : json conversion failed : " ++ err
+
+extend :: Value -> Value -> Value
+extend (Object a) (Object b) = Object $ HML.union a b
+extend (Object a) _          = Object a
+extend _          _          = error $ "extend : cannot extend non-object value"
 
 compileTemplate :: FilePath -> Action Template
 compileTemplate fp = do
@@ -45,12 +51,10 @@ compileTemplate fp = do
 --
 markdownToHTML :: T.Text -> Action Value
 markdownToHTML input = do
-  docs <- splitMetadata input
-  case docs of
-    (meta, content) -> do
-      let html = commonmarkToHtml [] [] content
-      return $ A.object [("content", String html)]
-    _ -> fail $ "markdownToHTML : wrong input format, expected [content] or [meta, content]"
+  (meta, content) <- splitMetadata input
+  let html   = commonmarkToHtml [] [] content
+  let output = meta `extend` A.object [("content", String html)]
+  return output
 
 splitMetadata :: T.Text -> Action (Value, T.Text)
 splitMetadata input = case parseOnly parser input of
@@ -64,7 +68,7 @@ splitMetadata input = case parseOnly parser input of
     separator
     header <- T.pack <$> manyTill anyChar separator
     return $ case decodeEither' (encodeUtf8 header) of
-      Left  err    -> Null
+      Left  _      -> Null
       Right parsed -> parsed
 
   parser = do
