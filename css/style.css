@@ -27,12 +27,13 @@ footer * {
   vertical-align: baseline;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 body {
   background: #fff;
-
   width: 100%;
+  max-width: 1000px;
   height: 100%;
   padding: 1rem;
   margin: 0 auto;
@@ -40,7 +41,6 @@ body {
   overflow: hidden auto;
 }
 body.index {
-  max-width: 1000px;
   grid-template:
     "header header"   min-content
     "main   aside"    auto
@@ -52,7 +52,6 @@ body.index > main > :first-child {
   margin: 0 0 1rem 0;
 }
 body.post {
-  max-width: 800px;
   grid-template:
     "header"   min-content
     "main"     auto
@@ -85,14 +84,24 @@ aside {
 }
 footer {
   grid-area: footer;
-  margin: 1rem 0 0 0;
+  margin: 3rem 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  flex-flow: wrap;
+  justify-content: center;
+}
+footer > * {
+  padding-right: 0.25rem;
 }
 
 article {
+  max-width: 650px;
+  margin: 0 auto 5rem auto;
   font-size: 110%;
   font-family: medium-content-serif-font, serif;
   font-weight: 100;
   color: #1e1e1e;
+  position: relative;
 }
 article h1 { font-size: 240%; margin-bottom: 0; }
 article h2 { font-size: 180%; margin-bottom: 0; }
@@ -106,6 +115,13 @@ article code {
   display: inline-block;
   max-width: 100%;
   white-space: pre-wrap;
+}
+article::after {
+  content: "";
+  border-top: 1px solid #555;
+  position: absolute;
+  width: 100%;
+  margin: 2rem 0;
 }
 
 ul.post-list {
