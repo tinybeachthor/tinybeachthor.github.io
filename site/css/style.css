@@ -31,8 +31,8 @@ footer * {
 
 body {
   background: #fff;
-
   width: 100%;
+  max-width: 1000px;
   height: 100%;
   padding: 1rem;
   margin: 0 auto;
@@ -40,7 +40,6 @@ body {
   overflow: hidden auto;
 }
 body.index {
-  max-width: 1000px;
   grid-template:
     "header header"   min-content
     "main   aside"    auto
@@ -52,7 +51,6 @@ body.index > main > :first-child {
   margin: 0 0 1rem 0;
 }
 body.post {
-  max-width: 800px;
   grid-template:
     "header"   min-content
     "main"     auto
@@ -89,6 +87,8 @@ footer {
 }
 
 article {
+  max-width: 650px;
+  margin: 0 auto 5rem auto;
   font-size: 110%;
   font-family: medium-content-serif-font, serif;
   font-weight: 100;
