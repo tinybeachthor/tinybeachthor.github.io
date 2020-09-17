@@ -94,9 +94,13 @@ article {
   font-weight: 100;
   color: #1e1e1e;
 }
-article strong {
-  font-weight: 900;
-}
+article h1 { font-size: 240%; margin-bottom: 0; }
+article h2 { font-size: 180%; margin-bottom: 0; }
+article h3 { font-size: 140%; margin-bottom: 0; }
+article h4 { font-size: 120%; margin-bottom: 0; }
+article h5 { font-size: 110%; margin-bottom: 0; }
+article h6 { font-size: 100%; margin-bottom: 0; }
+article strong { font-weight: 900; }
 article code {
   position: relative;
   display: inline-block;
