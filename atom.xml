@@ -2,12 +2,58 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>OBSERVATIONS</title>
   <link href="https://tinybeachthor.github.io/atom.xml" rel="self" type="application/rss+xml" />
-  <updated>2020-09-16T08:33:41Z</updated>
+  <updated>2020-09-17T14:29:26Z</updated>
   <author>
       <name>Martin Toman</name>
   </author>
   <id>https://tinybeachthor.github.io/</id>
 
+  <entry>
+      <title>This blog : Origin</title>
+      <link href="https://tinybeachthor.github.io/post/blog-origin.html"/>
+      <id>https://tinybeachthor.github.io/post/blog-origin.html</id>
+      <updated>2020-09-17T00:00:00Z</updated>
+      <category term="blog"/>
+      <summary>I&#39;ve decide to start a blog.</summary>
+      <content type="html"><![CDATA[<h1>This blog : Origin</h1>
+<p>I've decide to start a blog.</p>
+<p>After a short-lasting affair with Medium, this time for real and doing it proper.
+And after the final bit of procrastination - building a custom static
+site generator - I'm ready.</p>
+<h2>Why and What</h2>
+<p>Two questions, one answer.</p>
+<p>Blog is short for weblog. And that's my intention here. To keep a
+public log of activities and ideas.</p>
+<blockquote>
+<p>The term &quot;weblog&quot; was coined by Jorn Barger on December 17, 1997.</p>
+</blockquote>
+<p>The motivation behind this blog is entirely selfish.</p>
+<p>I intent to:</p>
+<ol>
+<li>Force myself to better formulate ideas and projects</li>
+<li>Hold myself accountable</li>
+<li>Keep a &quot;paper&quot; trail - for future reference and to share with others</li>
+</ol>
+<p>That's about enough for the start.</p>
+<h2>How</h2>
+<p>Inspired by <a href="https://github.com/ChrisPenner/slick">slick</a> static site generator.</p>
+<p>Uses the <a href="https://shakebuild.com/">shake build system</a>.
+Renders markdown files into a static webpage and generates syndication feeds.</p>
+<p>Reproducibly built using <a href="https://nixos.org/">nix</a>. And cached with <a href="https://cachix.org/">cachix</a>.</p>
+<p>Automated CI deployment to Github Pages (using Github Action).</p>
+<p>TL;DR push and forget</p>
+<h3>Legal</h3>
+<p>Copyright 2020 Martin Toman</p>
+<p><a href="https://github.com/tinybeachthor/tinybeachthor.github.io/tree/master/posts">Content</a>
+licensed under <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/posts/LICENSE">CC BY 4.0</a>.</p>
+<p><a href="https://github.com/tinybeachthor/tinybeachthor.github.io">Code</a>
+licensed under <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/LICENSE">BSD 3-Clause</a>.</p>
+<p><strong>I encourage everyone who would like to do so to fork my setup and use it for anythinig they like.</strong></p>
+<h2>Conclusion</h2>
+<p>Finally started a blog. Github centric setup.</p>
+<p>Do the same, if you like.</p>
+]]></content>
+  </entry>
   <entry>
       <title>Markdown Test</title>
       <link href="https://tinybeachthor.github.io/post/markdown-test.html"/>
