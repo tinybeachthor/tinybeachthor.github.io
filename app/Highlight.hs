@@ -4,16 +4,17 @@
 --   BSD 3-Clause
 
 {-# LANGUAGE ViewPatterns   #-}
+{-# LANGUAGE OverloadedStrings   #-}
 
 module Highlight
   ( highlightNode
   )
 where
 
+import           Data.Maybe                     ( fromJust )
 import           Data.Text                      ( Text )
 import           CMarkGFM
-import           Text.Highlighting.Kate
-import           Text.Highlighting.Kate.Styles
+import           Skylighting
 import           Text.Blaze.Html.Renderer.Text
 
 import qualified Data.Text                     as T
@@ -37,8 +38,20 @@ highlightNodeWith f (Node pos (CODE_BLOCK info code) ns) = Node pos
                                                                 (HTML_BLOCK formatted)
                                                                 (map (highlightNodeWith f) ns)
  where
+
   (codeLang, T.drop 1 -> codeInfo) = T.break (== ' ') (T.strip info)
-  highlighted = highlightAs (T.unpack codeLang) (T.unpack code)
-  opts = defaultFormatOpts { containerClasses = words (T.unpack codeInfo) }
-  formatted = TL.toStrict . renderHtml $ formatHtmlBlock (f codeLang codeInfo opts) highlighted
+
+  syntax                           = case lookupSyntax codeLang defaultSyntaxMap of
+    Nothing -> fromJust $ lookupSyntax "Default" defaultSyntaxMap
+    Just sn -> sn
+  config      = TokenizerConfig { traceOutput = False, syntaxMap = defaultSyntaxMap }
+
+  sourceLines = case tokenize config syntax code of
+    Left  e  -> error $ e
+    Right ls -> ls
+
+  opts      = defaultFormatOpts { containerClasses = (T.words codeInfo) }
+
+  formatted = TL.toStrict . renderHtml $ formatHtmlBlock (f codeLang codeInfo opts) sourceLines
+
 highlightNodeWith f (Node pos type_ ns) = Node pos type_ (map (highlightNodeWith f) ns)

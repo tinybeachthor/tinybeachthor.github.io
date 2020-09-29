@@ -29,11 +29,11 @@ executable blog4
     , blaze-html
     , cmark-gfm
     , containers
-    , highlighting-kate
     , lens
     , lens-aeson
     , mustache
     , shake
+    , skylighting
     , text
     , time
     , unordered-containers
