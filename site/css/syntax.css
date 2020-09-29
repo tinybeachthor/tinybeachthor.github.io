@@ -35,14 +35,14 @@ div.sourceCode
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { font-weight: bold; } /* Alert */
-code span.an { font-style: italic; } /* Annotation */
+code span.an { font-style: italic; color: #999; } /* Annotation */
 code span.cf { font-weight: bold; } /* ControlFlow */
-code span.co { font-style: italic; } /* Comment */
-code span.cv { font-style: italic; } /* CommentVar */
-code span.do { font-style: italic; } /* Documentation */
+code span.co { font-style: italic; color: #999; } /* Comment */
+code span.cv { font-style: italic; color: #999; } /* CommentVar */
+code span.do { font-style: italic; color: #999; } /* Documentation */
 code span.dt { text-decoration: underline; } /* DataType */
 code span.er { font-weight: bold; } /* Error */
-code span.in { font-style: italic; } /* Information */
+code span.in { font-style: italic; color: #999; } /* Information */
 code span.kw { font-weight: bold; } /* Keyword */
 code span.pp { font-weight: bold; } /* Preprocessor */
-code span.wa { font-style: italic; } /* Warning */
+code span.wa { font-style: italic; color: #999; } /* Warning */
