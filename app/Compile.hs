@@ -6,7 +6,10 @@ module Compile
   )
 where
 
-import           CMarkGFM                       ( commonmarkToHtml )
+import           CMarkGFM                       ( commonmarkToNode
+                                                , nodeToHtml
+                                                , optUnsafe
+                                                )
 import           Data.Aeson                    as A
 import           Data.Attoparsec.Text
 import           Data.Text.Encoding             ( encodeUtf8 )
@@ -21,6 +24,7 @@ import           Text.Mustache.Compile          ( getPartials
 
 import qualified Data.Text                     as T
 
+import           Highlight                      ( highlightNode )
 import           Utils                          ( extend )
 
 compileTemplate :: FilePath -> Action Template
@@ -41,7 +45,8 @@ compileTemplate fp = do
 markdownToHTML :: T.Text -> Action Value
 markdownToHTML input = do
   (meta, content) <- splitMetadata input
-  let html   = commonmarkToHtml [] [] content
+  let node   = commonmarkToNode [] [] content
+  let html   = nodeToHtml [optUnsafe] [] (highlightNode node)
   let output = meta `extend` A.object [("content", String html)]
   return output
 

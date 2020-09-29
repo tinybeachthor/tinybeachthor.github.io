@@ -26,8 +26,10 @@ executable blog4
       aeson
     , attoparsec
     , base
+    , blaze-html
     , cmark-gfm
     , containers
+    , highlighting-kate
     , lens
     , lens-aeson
     , mustache
@@ -38,6 +40,7 @@ executable blog4
     , yaml
   other-modules:
       Compile
+    , Highlight
     , Types
     , Utils
     , Feed.Atom
