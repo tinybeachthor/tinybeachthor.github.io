@@ -8,6 +8,7 @@ import           Control.Lens
 import           Control.Monad
 import           Data.Aeson
 import           Data.Aeson.Lens
+import           Data.List                      ( sortBy )
 import           Development.Shake
 import           Development.Shake.Forward
 import           Development.Shake.FilePath
@@ -82,7 +83,7 @@ copyStaticFiles = do
 --   defines workflow to build the website
 buildRules :: Action ()
 buildRules = do
-  allPosts <- buildPosts
+  allPosts <- (sortBy (flip compare)) <$> buildPosts
   buildIndex allPosts
   Feed.Atom.build allPosts siteMeta outputFolder
   Feed.RSS.build allPosts siteMeta outputFolder
