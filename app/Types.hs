@@ -6,6 +6,10 @@ module Types where
 
 import           GHC.Generics                   ( Generic )
 import           Data.Aeson
+import           Data.Time                      ( UTCTime
+                                                , parseTimeOrError
+                                                , defaultTimeLocale
+                                                )
 import           Development.Shake.Classes      ( Binary )
 
 import qualified Data.HashMap.Lazy             as HML
@@ -47,4 +51,10 @@ data Post =
          , description :: String
          , image       :: Maybe String
          }
-    deriving (Generic, Eq, Ord, Show, FromJSON, ToJSON, Binary)
+    deriving (Generic, Eq, Show, FromJSON, ToJSON, Binary)
+
+instance Ord Post where
+  a <= b = (parseHumanTime . date $ a) <= (parseHumanTime . date $ b)
+   where
+    parseHumanTime :: String -> UTCTime
+    parseHumanTime = parseTimeOrError True defaultTimeLocale "%b %e, %Y"
