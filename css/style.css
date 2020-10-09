@@ -116,6 +116,18 @@ article code {
   max-width: 100%;
   white-space: pre-wrap;
 }
+article blockquote {
+  position: relative;
+  margin: 1rem 2rem 1rem 2rem;
+  font-style: italic;
+}
+article blockquote::before {
+  content: "";
+  position: absolute;
+  border-left: 5px solid #98ddfc;
+  height: 100%;
+  left: -1.0rem;
+}
 article::after {
   content: "";
   border-top: 1px solid #555;
