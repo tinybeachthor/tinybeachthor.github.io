@@ -14,10 +14,8 @@ mkShell {
     git
     gnumake
     cachix
-    cabal2nix
 
-    cabal-install
-    (ghc.withPackages (hp: [ zlib ]))
+    snack
     haskellPackages.ghcide
     haskellPackages.brittany
 
