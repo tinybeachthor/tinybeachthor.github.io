@@ -14,6 +14,11 @@ jobs:
     - uses: cachix/install-nix-action@v10
     - uses: cachix/cachix-action@v6
       with:
+        name: iohk
+        extraPullNames: https://hydra.iohk.io
+        skipPush: true
+    - uses: cachix/cachix-action@v6
+      with:
         name: tinybeachthor
         signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
 
