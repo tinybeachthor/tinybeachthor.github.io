@@ -1,16 +1,31 @@
 { sources ? import ./nix/sources.nix }:
 
-with { overlay = _: pkgs: {
-  niv          = import sources.niv { };
-}; };
+let
+  overlay = _: pkgs: {
+    niv = import sources.niv { };
+  };
 
-with import sources.nixpkgs {
-  overlays = [ overlay ];
-  config = { };
-};
+  pkgs = import sources.nixpkgs {
+    overlays = [ overlay ];
+    config = { };
+  };
 
-mkShell {
-  buildInputs = [
+  hsPkgs = import ./default.nix { };
+in
+
+hsPkgs.shellFor {
+  # Include only the *local* packages of your project.
+  packages = ps: with ps; [
+    blog4
+  ];
+
+  withHoogle = true;
+
+  tools = {
+    cabal = "3.2.0.0";
+  };
+
+  buildInputs = with pkgs; [
     git
     gnumake
     cachix
@@ -20,4 +35,6 @@ mkShell {
 
     nodePackages.serve
   ];
+
+  exactDeps = true;
 }
