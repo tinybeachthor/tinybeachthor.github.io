@@ -12,7 +12,7 @@ clean:
 	rm -rf docs/*
 .PHONY: clean
 result:
-	nix-build | cachix push tinybeachthor
+	nix-build -A blog4.components.exes.blog4 | cachix push tinybeachthor
 
 serve:
 	serve --no-clipboard docs

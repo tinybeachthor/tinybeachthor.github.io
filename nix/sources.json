@@ -1,4 +1,16 @@
 {
+    "haskell.nix": {
+        "branch": "master",
+        "description": "Alternative Haskell Infrastructure for Nixpkgs",
+        "homepage": "https://input-output-hk.github.io/haskell.nix",
+        "owner": "input-output-hk",
+        "repo": "haskell.nix",
+        "rev": "598d40b660146fec29da5ccdd5d693899a1a2aca",
+        "sha256": "0n9ggmb6n3v1ra820z3pil8lavnw5q71gk50birkqv0583zm2dba",
+        "type": "tarball",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/598d40b660146fec29da5ccdd5d693899a1a2aca.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",
