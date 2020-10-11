@@ -22,7 +22,7 @@ jobs:
         signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
 
     - name: Build generator
-      run: nix-build
+      run: nix-build -A blog4.components.exes.blog4
     - name: Build blog
       run: ./result/bin/blog4
 
