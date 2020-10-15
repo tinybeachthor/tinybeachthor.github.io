@@ -30,7 +30,7 @@ hsPkgs.shellFor {
     gnumake
     cachix
 
-    haskellPackages.ghcide
+    haskellPackages.haskell-language-server
     haskellPackages.brittany
 
     nodePackages.serve
