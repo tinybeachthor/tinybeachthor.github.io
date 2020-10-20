@@ -24,6 +24,7 @@ import           Text.Mustache.Compile          ( getPartials
 
 import qualified Data.Text                     as T
 
+import           Compile.Embed                  ( embedNode )
 import           Compile.Highlight              ( highlightNode )
 import           Utils                          ( extend )
 
@@ -46,7 +47,7 @@ markdownToHTML :: T.Text -> Action Value
 markdownToHTML input = do
   (meta, content) <- splitMetadata input
   let node   = commonmarkToNode [] [] content
-  let html   = nodeToHtml [optUnsafe] [] (highlightNode node)
+  let html   = nodeToHtml [optUnsafe] [] (highlightNode . embedNode $ node)
   let output = meta `extend` A.object [("content", String html)]
   return output
 
