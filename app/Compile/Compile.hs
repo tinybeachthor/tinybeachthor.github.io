@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings   #-}
 
-module Compile
+module Compile.Compile
   ( compileTemplate
   , markdownToHTML
   )
@@ -24,7 +24,7 @@ import           Text.Mustache.Compile          ( getPartials
 
 import qualified Data.Text                     as T
 
-import           Highlight                      ( highlightNode )
+import           Compile.Highlight              ( highlightNode )
 import           Utils                          ( extend )
 
 compileTemplate :: FilePath -> Action Template

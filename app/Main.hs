@@ -16,7 +16,7 @@ import           Text.Mustache.Render           ( substitute )
 
 import qualified Data.Text                     as T
 
-import           Compile                        ( compileTemplate
+import           Compile.Compile                ( compileTemplate
                                                 , markdownToHTML
                                                 )
 import           Types

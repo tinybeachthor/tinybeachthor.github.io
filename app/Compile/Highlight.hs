@@ -6,7 +6,7 @@
 {-# LANGUAGE ViewPatterns   #-}
 {-# LANGUAGE OverloadedStrings   #-}
 
-module Highlight
+module Compile.Highlight
   ( highlightNode
   )
 where

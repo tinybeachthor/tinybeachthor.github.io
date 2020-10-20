@@ -39,8 +39,8 @@ executable blog4
     , unordered-containers
     , yaml
   other-modules:
-      Compile
-    , Highlight
+      Compile.Compile
+    , Compile.Highlight
     , Types
     , Utils
     , Feed.Atom
