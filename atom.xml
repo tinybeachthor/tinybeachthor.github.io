@@ -2,12 +2,43 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>OBSERVATIONS</title>
   <link href="https://tinybeachthor.github.io/atom.xml" rel="self" type="application/rss+xml" />
-  <updated>2020-10-20T17:57:05Z</updated>
+  <updated>2020-10-22T09:41:29Z</updated>
   <author>
       <name>Martin Toman</name>
   </author>
   <id>https://tinybeachthor.github.io/</id>
 
+  <entry>
+      <title>Hacktoberfest 2020</title>
+      <link href="https://tinybeachthor.github.io/post/hacktoberfest-2020.html"/>
+      <id>https://tinybeachthor.github.io/post/hacktoberfest-2020.html</id>
+      <updated>2020-10-22T00:00:00Z</updated>
+      <category term="hacktoberfest"/>
+      <category term="git"/>
+      <summary>hacktoberfest no more</summary>
+      <content type="html"><![CDATA[<h1>Hacktoberfest 2020</h1>
+<p><a href="https://drewdevault.com/2020/10/01/Spamtoberfest.html">The now infamous open-source &quot;promotion&quot; event.</a></p>
+<p>I made my first open source contribution on github because of this event.
+It works, in a way - gets people to contribute.
+That was 4 years ago.</p>
+<h2>2019</h2>
+<p>I've accidentally completed the <a href="https://hacktoberfest.digitalocean.com/">hacktoberfest</a> last year, because of
+pull-based development workflow we used at a closed-source (and would
+not make much sense to be open source, as it was custom hardware,
+bespoke made for a competition) project, which happened to be hosted on
+github.</p>
+<p>This together with merging some pull-requests on personal repos (they
+were my PR's on my repos, too) made me accidentally complete the
+hacktoberfest on the first day.</p>
+<h2>2020</h2>
+<p>Since then, I have first-hand observed some issues stemming from the
+pull-based workflow and steered clear of it - towards trunk based
+development (AKA rebase is your best friend) and made (almost) no more PRs.</p>
+<p>I did not register for this year's hacktoberfest.</p>
+<p>But I gained something much more valuable than a t-shirt - linear git history.</p>
+<p>Perhaps the real t-shirt was the friends we made along the way.</p>
+]]></content>
+  </entry>
   <entry>
       <title>Universal REST client?</title>
       <link href="https://tinybeachthor.github.io/post/declarative-rest-text-client.html"/>
