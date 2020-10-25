@@ -7,9 +7,40 @@
     <description>random walk through time and space</description>
     <link>https://tinybeachthor.github.io</link>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Oct 2020 09:41:29 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2020 19:11:51 +0000</lastBuildDate>
     <ttl>1800</ttl>
 
+    <item>
+      <title>Compute time for nothing and 3D models for free</title>
+      <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
+      <link>https://tinybeachthor.github.io/post/3d-reconstruction.html</link>
+      <guid>https://tinybeachthor.github.io/post/3d-reconstruction.html</guid>
+      <description><![CDATA[<h1>Compute time for nothing and 3D models for free</h1>
+<p>On my last outing, between lockdowns and preparing for exams, I went to
+the local skatepark. It was much emptier than usual, although mostly
+because of the meteorological conditions.</p>
+<p>I always carry a <a href="https://www.sony.com/electronics/cyber-shot-compact-cameras/dsc-rx100">Sony RX100</a> on me, so I took some pics of the skating pool.</p>
+<p>84 high-res photos (5488x3664px)</p>
+<p>With the intent of turning it into a 3D model. Just to see what the
+results gonna look like, to see what to watch out for and what is
+possible to achieve today. A different kind of an arrow for the quiver.</p>
+<p>I did not expect it go too well, but was pleasantly surprised by the result.</p>
+<h2>AliceVision/Meshroom</h2>
+<p><a href="https://alicevision.org/#meshroom">Meshroom</a></p>
+<p>a photogammetry framework, <a href="https://github.com/alicevision/meshroom">open source</a>,
+works on linux</p>
+<p>However, to run the whole pipeline, CUDA is needed. Alas, I have no GPU.</p>
+<p>Enter cloud computing.</p>
+<h2>Google Colaboratory</h2>
+<p>Notebook computing. Tesla K80, 12GB RAM Xeon 2.3GHz, 320GB. Wipe every
+12 hours.</p>
+<p><a href="https://colab.research.google.com/gist/natowi/3044484ad0c98877692c399297e3ab7e/meshroomcolab.ipynb">MeshroomColab</a></p>
+<h2>Result</h2>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+]]></description>
+    </item>
     <item>
       <title>Hacktoberfest 2020</title>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
