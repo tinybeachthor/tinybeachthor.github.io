@@ -7,9 +7,63 @@
     <description>random walk through time and space</description>
     <link>https://tinybeachthor.github.io</link>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2020 19:11:51 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2020 21:11:42 +0000</lastBuildDate>
     <ttl>1800</ttl>
 
+    <item>
+      <title>A-FRAME - some forking required</title>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      <link>https://tinybeachthor.github.io/post/aframe-forking-required.html</link>
+      <guid>https://tinybeachthor.github.io/post/aframe-forking-required.html</guid>
+      <description><![CDATA[<h1>A-FRAME - some forking required</h1>
+<p>About building a VR photo album as this years' &quot;expo&quot;.
+Here is the final result:</p>
+<p><a href="https://expo.trestripes.com/2020/index.html">trestripes 2020 expo</a></p>
+<p>This was built using the industry-standard, and the only full-fledged
+solution to VR and AR website experiences - <a href="https://aframe.io/">&quot;A-FRAME&quot;</a>.
+Here follows the very incomplete documentation of the whole process, and
+some observations.</p>
+<h2>Extensibility</h2>
+<p>A-frame is a rather thin wrapper around THREE.js and the DOM. It does
+not try to provide solutions to every use-case ever. But offers good
+defaults and provides a standard way of extending it - writing custom
+components.</p>
+<p>Sounds great, but.
+For this relatively small website, I had to create 2 custom components.
+One for the layout and one for fitting geometry to the texture size.</p>
+<p>These components were not custom, just customized - but still had to
+fork the whole code.</p>
+<h3>OO vs f</h3>
+<p>This exposes the biggest issue with objects - they are entities of their
+own. Encapsulating a certain behavior or workflow instead of an
+operation, which could be rewired in a different way.</p>
+<p>Because of needing to change a single line in the
+<code>fit-texture-component</code> I will be stuck with maintaining the fork of
+this component.</p>
+<blockquote>
+<p>When extensibility is a priority, objects are not an option.</p>
+</blockquote>
+<h3>Complex and Complicated</h3>
+<p>Here is a nice overview of addressing innate complexity by Alan Kay.</p>
+<p><div class='video-container'><iframe src='https://www.youtube.com/embed/ubaX1Smg6pY'></iframe></div></p>
+<p>The overall idea of the talk is - even though some tasks are inherently
+complex, we can split them into simpler atomic pieces and address them
+one by one.</p>
+<p>If we are able to solve the atomic pieces completely, such that the
+complexity does not leak into other parts depending on this one, we have
+successfully simplified the problem. Easier said then done.</p>
+<blockquote>
+<p>Java bad, Lisp better, DSL's best</p>
+</blockquote>
+<p>Complex problems are best addressed by complete solutions to atomic
+parts. Some examples that handle this well (at least in some aspects):</p>
+<ul>
+<li>Haskell - as long as you stay in the pure and don't push it too far</li>
+<li>Nix - when not hitting some weird configuration edge case</li>
+<li>Git push/pull - simple, fail-fast</li>
+</ul>
+]]></description>
+    </item>
     <item>
       <title>Compute time for nothing and 3D models for free</title>
       <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
