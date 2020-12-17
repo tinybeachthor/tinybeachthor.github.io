@@ -1,6 +1,5 @@
 ---
 title: "A-FRAME - some forking required"
-author: Me
 date: Oct 31, 2020
 tags: [aframe, photo, complexity]
 description: my experience with a-frame, building a VR photo album

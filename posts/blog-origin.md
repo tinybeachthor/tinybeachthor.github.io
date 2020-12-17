@@ -1,7 +1,6 @@
 ---
 title: "This blog : Origin"
 date: Sep 17, 2020
-author: Me
 tags: [blog]
 description: I've decide to start a blog.
 

@@ -1,7 +1,6 @@
 ---
 title: Universal REST client?
 date: Oct 05, 2020
-author: Me
 tags: [ universal, REST ]
 description: Composable way to interact with web services.
 

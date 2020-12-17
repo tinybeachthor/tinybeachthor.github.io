@@ -1,6 +1,5 @@
 ---
 title: Hacktoberfest 2020
-author: Me
 date: Oct 22, 2020
 tags: [hacktoberfest, git]
 description: hacktoberfest no more

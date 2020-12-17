@@ -1,6 +1,5 @@
 ---
 title: Compute time for nothing and 3D models for free
-author: Me
 date: Oct 24, 2020
 tags: [3D, compute, photo]
 description: 82 photos and 11 hours later...

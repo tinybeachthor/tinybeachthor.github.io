@@ -43,7 +43,6 @@ type Tag = String
 -- | Data for a blog post
 data Post =
     Post { title       :: String
-         , author      :: String
          , content     :: String
          , url         :: String
          , date        :: String

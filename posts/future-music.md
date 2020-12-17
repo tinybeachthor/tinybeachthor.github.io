@@ -1,7 +1,6 @@
 ---
 title: Future music is not human
 description: Your next favorite song will be composed by a machine.
-author: Me
 date: Dec 14, 2020
 tags: [ music, generative, future, opinion ]
 
