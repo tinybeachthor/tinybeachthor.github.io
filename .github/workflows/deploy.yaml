@@ -19,11 +19,11 @@ jobs:
         install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20200820_4d77513/install
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: cachix/cachix-action@67df45d3998d71c5dfb52e66898c3221b959ac0a
+    - uses: cachix/cachix-action@v8
       with:
         name: iohk
         skipPush: true
-    - uses: cachix/cachix-action@67df45d3998d71c5dfb52e66898c3221b959ac0a
+    - uses: cachix/cachix-action@v8
       with:
         name: tinybeachthor
         signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
