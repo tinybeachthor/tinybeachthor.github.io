@@ -100,11 +100,13 @@ article {
   font-size: 110%;
   font-family: medium-content-serif-font, serif;
   font-weight: 100;
+  line-height: 200%;
   color: #1e1e1e;
   position: relative;
 }
+article p { margin: 2rem 0; }
 article h1 { font-size: 240%; margin-bottom: 0; }
-article h2 { font-size: 180%; margin-bottom: 0; }
+article h2 { font-size: 180%; margin-bottom: 0; margin-top: 4rem; }
 article h3 { font-size: 140%; margin-bottom: 0; }
 article h4 { font-size: 120%; margin-bottom: 0; }
 article h5 { font-size: 110%; margin-bottom: 0; }
@@ -118,7 +120,7 @@ article code {
 }
 article blockquote {
   position: relative;
-  margin: 1rem 2rem 1rem 2rem;
+  margin: 2rem 1.5rem;
   font-style: italic;
 }
 article blockquote::before {
