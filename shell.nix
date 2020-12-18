@@ -1,19 +1,10 @@
-{ sources ? import ./nix/sources.nix }:
+{ pkgs }:
 
 let
-  overlay = _: pkgs: {
-    niv = import sources.niv { };
-  };
-
-  pkgs = import sources.nixpkgs {
-    overlays = [ overlay ];
-    config = { };
-  };
-
-  hsPkgs = import ./default.nix { };
+  project = import ./default.nix { inherit pkgs; };
 in
 
-hsPkgs.shellFor {
+project.shellFor {
   # Include only the *local* packages of your project.
   packages = ps: with ps; [
     blog4
@@ -22,7 +13,10 @@ hsPkgs.shellFor {
   withHoogle = true;
 
   tools = {
-    cabal = "3.2.0.0";
+    cabal = {
+      version     = "3.2.0.0";
+      index-state = "2020-10-10T00:00:00Z";
+    };
   };
 
   buildInputs = with pkgs; [
