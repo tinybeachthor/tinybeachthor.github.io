@@ -104,9 +104,9 @@ article {
   color: #1e1e1e;
   position: relative;
 }
-article p { margin: 2rem 0; }
-article h1 { font-size: 240%; margin-bottom: 0; }
-article h2 { font-size: 180%; margin-bottom: 0; margin-top: 4rem; }
+article p { margin: 1.5rem 0; }
+article h1 { font-size: 240%; margin-bottom: 3rem; }
+article h2 { font-size: 180%; margin-bottom: 0; margin-top: 3rem; }
 article h3 { font-size: 140%; margin-bottom: 0; }
 article h4 { font-size: 120%; margin-bottom: 0; }
 article h5 { font-size: 110%; margin-bottom: 0; }
@@ -117,6 +117,7 @@ article code {
   display: inline-block;
   max-width: 100%;
   white-space: pre-wrap;
+  line-height: 1.25rem;
 }
 article blockquote {
   position: relative;

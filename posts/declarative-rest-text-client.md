@@ -205,7 +205,6 @@ There is some initiative solving API usability:
 1. [API composition layer](https://nordicapis.com/the-need-for-an-api-composition-layer/)
    defining how to compose API's in another layer on top of API's
    themselves.
-
 2. [Real-World RESTful Service Composition: A Transformation-Annotation-Discovery Approach](https://ieeexplore.ieee.org/document/8241498)
    using all sorts of fancy stuff (wordnet) to create a conceptual model
    of the API, to facilitate human interaction.

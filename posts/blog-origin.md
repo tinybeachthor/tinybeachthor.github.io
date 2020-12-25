@@ -24,7 +24,6 @@ public log of activities and ideas.
 > The term "weblog" was coined by Jorn Barger on December 17, 1997.
 
 The motivation behind this blog is entirely selfish.
-
 I intent to:
 
 1. Force myself to better formulate ideas and projects
@@ -35,25 +34,20 @@ That's about enough for the start.
 
 ## How
 
-Inspired by [slick](https://github.com/ChrisPenner/slick) static site generator.
-
-Uses the [shake build system](https://shakebuild.com/).
-Renders markdown files into a static webpage and generates syndication feeds.
-
-Reproducibly built using [nix](https://nixos.org/). And cached with [cachix](https://cachix.org/).
-
-Automated CI deployment to Github Pages (using Github Action).
+- Inspired by [slick](https://github.com/ChrisPenner/slick) static site generator.
+- Uses the [shake build system](https://shakebuild.com/).
+  Renders markdown files into a static webpage and generates syndication feeds.
+- Reproducibly built using [nix](https://nixos.org/). And cached with [cachix](https://cachix.org/).
+- Automated CI deployment to Github Pages (using Github Action).
 
 TL;DR push and forget
 
-### Legal
+## Legal
 
-Copyright 2020 Martin Toman
-
-[Content](https://github.com/tinybeachthor/tinybeachthor.github.io/tree/master/posts)
+- Copyright 2020 Martin Toman
+- [Content](https://github.com/tinybeachthor/tinybeachthor.github.io/tree/master/posts)
 licensed under [CC BY 4.0](https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/posts/LICENSE).
-
-[Code](https://github.com/tinybeachthor/tinybeachthor.github.io)
+- [Code](https://github.com/tinybeachthor/tinybeachthor.github.io)
 licensed under [BSD 3-Clause](https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/LICENSE).
 
 **I encourage everyone who would like to do so to fork my setup and use it for anythinig they like.**
@@ -61,6 +55,5 @@ licensed under [BSD 3-Clause](https://github.com/tinybeachthor/tinybeachthor.git
 ## Conclusion
 
 Finally started a blog. Github centric setup.
-
 Do the same, if you like.
 

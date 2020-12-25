@@ -33,8 +33,6 @@ pull-based workflow and steered clear of it - towards trunk based
 development (AKA rebase is your best friend) and made (almost) no more PRs.
 
 I did not register for this year's hacktoberfest.
-
 But I gained something much more valuable than a t-shirt - linear git history.
-
 Perhaps the real t-shirt was the friends we made along the way.
 

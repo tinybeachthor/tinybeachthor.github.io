@@ -52,10 +52,11 @@ sampled representation of the real thing.
 As sound is a physical phenomenon, we need to model its behavior with a
 model - use an approximation.
 On the flip side, we are not limited by what is physically possible in
-this world. We could disregard the Doppler shift, make sound become
-louder as it moves further away.
-Taking things to the extreme: underwater drums, instruments moving at
-supersonic speeds, or non-euclidean recording rooms.
+this world.
+We could disregard the Doppler shift, make sound become
+louder as it moves further away; taking things to the extreme:
+underwater drums, instruments moving at supersonic speeds,
+or non-euclidean recording rooms.
 
 ## Human attention limits
 
@@ -72,14 +73,14 @@ However many you have the patience to use.
 
 It would be easy to extrapolate these observations, go all doomsday, and
 deduce that soon we are gonna have music so advanced you will need
-cybernetic augments to able to enjoy it.
+cybernetic augments to enjoy it.
 Such music will certainly exist, I would not be surprised if it already
 does.
 
-The vast majority of music evolve so dramatically. We will see more
+The vast majority of music won't evolve so dramatically. We will see more
 music being produced. More genres, more variations, more combinations.
 Music slowly approaching everyone's idea of perfection.
-Bespoke music, made to listen - on demand.
+Bespoke music, on demand.
 
 Whatever happens, music is an art form. And it will most likely always
 exist in the current form. After all, more orchestral pieces are being
