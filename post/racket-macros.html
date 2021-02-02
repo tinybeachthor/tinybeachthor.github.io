@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177284059-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-177284059-1');
+  </script>
+  
+  <meta charset="UTF-8">
+  <meta name="description" content="OBSERVATIONS">
+  <meta name="author" content="Martin Toman">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <title>OBSERVATIONS - Keeping it safe with macros</title>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@tinybeachthor">
+  <meta name="twitter:creator" content="@tinybeachthor">
+  <meta name="twitter:title" content="Keeping it safe with macros">
+  <meta name="twitter:description" content="racket macros for hyper defensive programming">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/font.css">
+</head>
+<body class="post">
+
+  <header>
+    <a href="https://tinybeachthor.github.io"><h1>Observations</h1></a>
+
+    <p class="title">
+      Keeping it safe with macros
+    </p>
+    <p class="date">Feb 02, 2021</p>
+    <br>
+    <div class="tags">
+      <span>#racket</span>
+      <span>#macro</span>
+    </div>
+  </header>
+
+  <article>
+    <h1>Keeping it safe with macros</h1>
+<p>Playing around with the excellent <a href="https://puredata.info/exhibition">pure data</a>,
+embedding it in a racket framework to get the extra super freedom of expression.
+How to abstract away all the C level details?
+Syntax parameters!</p>
+<h2>What is pure data?</h2>
+<p>Visual programming environment for multimedia,
+mostly sound.
+Really great because of very fast feedback - hear changes live.
+Also it's easier to see sound transformations wired on a patchboard.</p>
+<p>There are some limitations, and some operations are not easily handled in pure data.
+Possible to interface from pd outside, and from outside to pd -
+<a href="https://github.com/libpd/libpd">libpd</a>.</p>
+<h2>Embedding pure data patches</h2>
+<p>How better to complement a fast prototyping framework than with the best LISP?
+Enter <a href="https://racket-lang.org/">racket</a>.</p>
+<p>To send some data and export a sound from pd instance,
+a naive implementation yields the following:</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a>(let ([pd (make-pd-instance)])</span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a> (begin</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>  (pd-instance-open-project-patch pd &quot;kick.pd&quot;)</span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_transient&quot; 0.035)</span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_max_pitch&quot; 292.2)</span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_fall_time_1&quot; 17.59)</span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_break_pitch&quot; 83.89)</span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_fall_time_2&quot; 1042.0)</span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_amp_decay&quot; 1120.0)</span>
+<span id="10"><a href="#10" aria-hidden="true" tabindex="-1"></a>  (pd-instance-tick pd)</span>
+<span id="11"><a href="#11" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-bang pd &quot;kick_bang&quot;)</span>
+<span id="12"><a href="#12" aria-hidden="true" tabindex="-1"></a>  (begin0</span>
+<span id="13"><a href="#13" aria-hidden="true" tabindex="-1"></a>    (pd-instance-export pd 5)</span>
+<span id="14"><a href="#14" aria-hidden="true" tabindex="-1"></a>    #| ... |#</span>
+<span id="15"><a href="#15" aria-hidden="true" tabindex="-1"></a>    #| close and free everything ... |#</span>
+<span id="16"><a href="#16" aria-hidden="true" tabindex="-1"></a>    #| ... |#</span>
+<span id="17"><a href="#17" aria-hidden="true" tabindex="-1"></a>    )))</span></code></pre></div>
+<p>Gritty, chaotic, noisy and annoying. Very C.
+A lot is left to be desired here,
+especially since we have all these awesome metaprogramming features available in racket.</p>
+<h2>What</h2>
+<p>What can be improved?</p>
+<ul>
+<li>do not lose any flexibility</li>
+<li>create / free pd instance automatically</li>
+<li>make the pd commands available only inside the given context
+(getting strong monadic vibes here)</li>
+<li>hide repetitive passing of pd instance reference</li>
+</ul>
+<h2>How</h2>
+<p>Now to implement it.</p>
+<h3>Memory management</h3>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a>(define executor (make-will-executor))</span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a>(void (thread (lambda ()</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>                (let loop ()</span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a>                  (will-execute executor)</span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a>                  (loop)))))</span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>(define (pd-instance-free pd)</span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>  (libpd_free_instance pd))</span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="10"><a href="#10" aria-hidden="true" tabindex="-1"></a>#| after creating a pd-instance: |#</span>
+<span id="11"><a href="#11" aria-hidden="true" tabindex="-1"></a>(will-register executor instance pd-instance-free)</span></code></pre></div>
+<p>That should be enough to automatically the free once the pd-instance goes out of scope.</p>
+<h3>Isolated context</h3>
+<p>To create the pd-instance, pass it where necessary
+and keep the pd specific functions only accesible in this context,
+now this is asking for quite a lot.
+Better bring out the big guns!
+<a href="https://docs.racket-lang.org/reference/stxparam.html">Syntax parameters</a>
+will let us dynamically re-bind syntax to different expressions depending on context.</p>
+<p>At first we define empty syntax parameters
+(these will result in an exception if evaluated):</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a>(require</span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a>  racket/stxparam</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>  racket/splicing)</span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a>(define-syntax-parameter open-project-patch (syntax-rules ()))</span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a>(define-syntax-parameter send-float (syntax-rules ()))</span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>(define-syntax-parameter send-bang (syntax-rules ()))</span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>(define-syntax-parameter tick (syntax-rules ()))</span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a>(define-syntax-parameter export-rsound (syntax-rules ()))</span></code></pre></div>
+<p><em>Ideally these would throw custom exceptions,
+or result in a noop, or a sane default behavior.</em></p>
+<p>And the context macro to substitute the parameters:</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a>(define-syntax with-pd-instance</span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a>  (syntax-rules ()</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>    [(_ (action args ...) ...)</span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a>     (let ([pd* (make-pd-instance)])</span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a>       (splicing-syntax-parameterize</span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a>         ([open-project-patch (lambda (stx) #&#39;(curry pd-instance-open-project-patch pd*))]</span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>          [send-float (lambda (stx) #&#39;(curry pd-instance-send-float pd*))]</span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>          [send-bang (lambda (stx) #&#39;(curry pd-instance-send-bang pd*))]</span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a>          [tick (lambda (stx) #&#39;(lambda () (curry pd-instance-tick pd*)))]</span>
+<span id="10"><a href="#10" aria-hidden="true" tabindex="-1"></a>          [export-rsound (lambda (stx) #&#39;(curry pd-instance-export-rsound pd*))])</span>
+<span id="11"><a href="#11" aria-hidden="true" tabindex="-1"></a>         (begin</span>
+<span id="12"><a href="#12" aria-hidden="true" tabindex="-1"></a>           ((action) args ...) ...)))]))</span></code></pre></div>
+<p>When expanded, this will create a new pd-instance,
+set the syntax parameters to pass the instance to the underlying function,
+and unwrap the body of the macro otherwise unchanged.
+(The freeing of the instance is already handled by the will-executor.)</p>
+<p>Using the syntax parameters also guarantees that
+<a href="http://scheme2011.ucombinator.org/papers/Barzilay2011.pdf">our macros are hygienic</a>.</p>
+<h2>The final form</h2>
+<p>Now this:</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a>(let ([pd (make-pd-instance)])</span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a> (begin</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>  (pd-instance-open-project-patch pd &quot;kick.pd&quot;)</span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_transient&quot; 0.035)</span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_max_pitch&quot; 292.2)</span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_fall_time_1&quot; 17.59)</span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_break_pitch&quot; 83.89)</span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_fall_time_2&quot; 1042.0)</span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-float pd &quot;kick_amp_decay&quot; 1120.0)</span>
+<span id="10"><a href="#10" aria-hidden="true" tabindex="-1"></a>  (pd-instance-tick pd)</span>
+<span id="11"><a href="#11" aria-hidden="true" tabindex="-1"></a>  (pd-instance-send-bang pd &quot;kick_bang&quot;)</span>
+<span id="12"><a href="#12" aria-hidden="true" tabindex="-1"></a>  (begin0</span>
+<span id="13"><a href="#13" aria-hidden="true" tabindex="-1"></a>    (pd-instance-export pd 5)</span>
+<span id="14"><a href="#14" aria-hidden="true" tabindex="-1"></a>    #| ... |#</span>
+<span id="15"><a href="#15" aria-hidden="true" tabindex="-1"></a>    #| close and free everything ... |#</span>
+<span id="16"><a href="#16" aria-hidden="true" tabindex="-1"></a>    #| ... |#</span>
+<span id="17"><a href="#17" aria-hidden="true" tabindex="-1"></a>    )))</span></code></pre></div>
+<p>becomes:</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a>(with-pd-instance</span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a>  (open-project-patch &quot;kick.pd&quot;)</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>  (send-float &quot;kick_transient&quot; 0.035)</span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a>  (send-float &quot;kick_max_pitch&quot; 292.2)</span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a>  (send-float &quot;kick_fall_time_1&quot; 17.59)</span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a>  (send-float &quot;kick_break_pitch&quot; 83.89)</span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>  (send-float &quot;kick_fall_time_2&quot; 1042.0)</span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>  (send-float &quot;kick_amp_decay&quot; 1120.0)</span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a>  (tick)</span>
+<span id="10"><a href="#10" aria-hidden="true" tabindex="-1"></a>  (send-bang &quot;kick_bang&quot;)</span>
+<span id="11"><a href="#11" aria-hidden="true" tabindex="-1"></a>  (export 5))</span></code></pre></div>
+
+  </article>
+
+  <footer>
+    <span>
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/tree/master/posts">Content</a>
+      licensed under
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/posts/LICENSE"> CC BY 4.0</a>.
+    </span>
+    <span>
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io">Code</a>
+      licensed under
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/LICENSE">BSD 3-Clause</a>.
+    </span>
+  </footer>
+
+<body>
+</html>
