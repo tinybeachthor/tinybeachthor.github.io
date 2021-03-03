@@ -1,5 +1,6 @@
 .shake/
 dist-newstyle/
 result
+result-json
 
 docs/

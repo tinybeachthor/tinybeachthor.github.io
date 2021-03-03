@@ -15,9 +15,14 @@
           inherit system;
           overlays = [ tinybeachthor.overlay haskellNix.overlay ];
         });
-      in {
-        defaultPackage =
-          (import ./default.nix { inherit pkgs; }).blog4.components.exes.blog4;
+        project = (import ./default.nix { inherit pkgs; });
+        blog4 = project.blog4;
+      in rec {
+        defaultPackage = blog4.components.exes.blog4;
+        packages = {
+          plan-nix = project.plan-nix;
+          blog4 = defaultPackage;
+        };
         devShell = import ./shell.nix { inherit pkgs; };
       });
 }
