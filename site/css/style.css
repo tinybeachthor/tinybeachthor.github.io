@@ -114,6 +114,7 @@ footer > * {
 }
 
 article {
+  width: 100%;
   max-width: 650px;
   margin: 0 auto 5rem auto;
   font-size: 110%;
