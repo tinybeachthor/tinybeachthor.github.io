@@ -94,6 +94,25 @@ footer > * {
   padding-right: 0.25rem;
 }
 
+@media only screen and (max-width: 650px) {
+  body {
+    padding: 0;
+  }
+  body.index {
+    grid-template:
+      "header"   min-content
+      "main"     auto
+      "aside"    min-content
+      "footer"   min-content
+      / auto;
+  }
+  aside {
+    margin: 2.5rem 1rem 0 1rem;
+    padding: 1rem;
+    border: red 2px solid;
+  }
+}
+
 article {
   max-width: 650px;
   margin: 0 auto 5rem auto;
