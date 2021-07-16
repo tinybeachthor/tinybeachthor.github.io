@@ -56,14 +56,4 @@ one by one.
 
 If we are able to solve the atomic pieces completely, such that the
 complexity does not leak into other parts depending on this one, we have
-successfully simplified the problem. Easier said then done.
-
-> Java bad, Lisp better, DSL's best
-
-Complex problems are best addressed by complete solutions to atomic
-parts. Some examples that handle this well (at least in some aspects):
-
-* Haskell - as long as you stay in the pure and don't push it too far
-* Nix - when not hitting some weird configuration edge case
-* Git push/pull - simple, fail-fast
-
+successfully simplified the problem.
