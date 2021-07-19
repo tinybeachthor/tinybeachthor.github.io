@@ -20,7 +20,6 @@ jobs:
     - uses: cachix/cachix-action@v10
       with:
         name: iohk
-        skipPush: true
     - uses: cachix/cachix-action@v10
       with:
         name: tinybeachthor
