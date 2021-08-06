@@ -151,6 +151,9 @@ article blockquote::before {
   height: 100%;
   left: -1.0rem;
 }
+article img {
+  max-width: 100%;
+}
 article::after {
   content: "";
   border-top: 1px solid #555;

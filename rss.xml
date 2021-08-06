@@ -7,9 +7,78 @@
     <description>random walk through time and space</description>
     <link>https://tinybeachthor.github.io</link>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Jul 2021 03:39:30 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Aug 2021 18:49:20 +0000</lastBuildDate>
     <ttl>1800</ttl>
 
+    <item>
+      <title>Towards EXPO2021</title>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      <link>https://tinybeachthor.github.io/post/towards-expo-2021.html</link>
+      <guid>https://tinybeachthor.github.io/post/towards-expo-2021.html</guid>
+      <description><![CDATA[<h1>Towards EXPO2021</h1>
+<blockquote>
+<p>TODO: link to the project here</p>
+</blockquote>
+<p><a href="https://tinybeachthor.github.io/post/aframe-forking-required.html">Last year</a> I started a tradition of making a small self-contained technology art project.
+The idea came from the necessity -- I needed a way to make photo
+exhibition during a pandemic.
+The answer was VR.</p>
+<p>A year later and it is about time to start working on this year's
+project.
+Last year was VR.
+It is very obvious where this is going.
+We are building an AR experience!</p>
+<h2>What's it gonna be</h2>
+<p><img src="https://hypebeast.com/image/2021/07/adidas-yeezy-foam-runner-mx-cream-clay-official-look-release-info-gx8774-1.jpg" alt="YZY Foam Runner MX Cream Clay" /></p>
+<p>The story behind the inspiration for the project is a classical one:</p>
+<ol>
+<li>Kanye teases new ugly shoes</li>
+<li>Ugly shoes are releases in a limited run</li>
+<li>No shoes...</li>
+</ol>
+<p>Though ugly, there is something really cool about the grown-like -- as
+opposed to made -- structure of it.
+Nature is cool.</p>
+<p>Other cool grown-like things to investigate (concrete!):</p>
+<p><img src="https://static.dezeen.com/uploads/2019/07/concrete-choreography-3d-printed-columns-stage-eth-zurich-students-switzerland_sq-c.jpg" alt="3D printed concrete columns" /></p>
+<p><img src="https://www.sculpteo.com/blog/wp-content/uploads/2016/12/xtree1.jpg" alt="3D printed concrete tree-like structure" /></p>
+<h2>What to do</h2>
+<p>Let's grow virtual shoes on everyone's feet!</p>
+<h3>AR rendering</h3>
+<p><a href="https://svelthree.dev/">THREE.js + svelte</a></p>
+<p>Should be fast enough, otherwise stitch all code together and hand
+optimize the 3D rendering.
+The biggest bottleneck should be the AR object detection.</p>
+<h3>AR object detection</h3>
+<p>We need to detect people's feet in the video.
+Since people wear shoes a lot, we can get away by <a href="https://google.github.io/mediapipe/solutions/objectron.html">detecting shoes</a>.</p>
+<p><em>Render the virtual shoes oversized.</em>
+<div class='video-container'><iframe src='https://www.youtube.com/embed/cwQgjq0mCdE'></iframe></div></p>
+<h3>Grow the shoes</h3>
+<p>Simulate tentacles growing on top of a surface.</p>
+<ol>
+<li>Define shoe base geometry with equations</li>
+<li>Determine shoe normals &amp; climb over the surface like a vine</li>
+<li>Inflate the path with tentacle geometry</li>
+</ol>
+<p>Initialize RNG from the camera image -- needs to be robust.</p>
+<h3>Library, Achievements, Socials</h3>
+<p>Make this an &quot;experience&quot; with a library of saved models.
+Share images to socials.
+Add achievements to drive engagement.</p>
+<h2>That's about it</h2>
+<p>Rather complex all in all, but should be doable.</p>
+<ol>
+<li>Setup rendering</li>
+<li>Create tentacle geometry</li>
+<li>Simulate vine-like growth</li>
+<li>Shoe detection from video stream</li>
+<li>AR detect shoe positions</li>
+<li>Place virtual shoe in space</li>
+<li>Polish with engagement features</li>
+</ol>
+]]></description>
+    </item>
     <item>
       <title>Keeping it safe with macros</title>
       <pubDate>Tue, 02 Feb 2021 00:00:00 +0000</pubDate>
