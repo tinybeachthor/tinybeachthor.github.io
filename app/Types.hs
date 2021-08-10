@@ -21,7 +21,6 @@ data SiteMeta =
              , siteTitle       :: String
              , siteDescription :: String
              , authorEmail     :: Maybe String
-             , twitterHandle   :: Maybe String -- Without @
              , githubUser      :: Maybe String
              }
     deriving (Generic, Eq, Ord, Show, ToJSON)
