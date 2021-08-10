@@ -12,4 +12,5 @@ project {
   compiler-nix-name = "ghc8101"; # Not used for `stack.yaml` based projects.
   index-state = "2020-10-10T00:00:00Z";
   plan-sha256 = "0q33yygblhnfczxczc3vdr9yncqfqwjrvf8b739svy2isgaqc8bb";
+  materialized = ./blog4.materialized;
 }

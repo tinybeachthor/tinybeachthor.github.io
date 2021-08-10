@@ -21,6 +21,7 @@
         defaultPackage = blog4.components.exes.blog4;
         packages = {
           plan-nix = project.plan-nix;
+          materialize = project.updateMaterialized;
           blog4 = defaultPackage;
         };
         devShell = import ./shell.nix { inherit pkgs; };
