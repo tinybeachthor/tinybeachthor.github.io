@@ -7,9 +7,54 @@
     <description>random walk through time and space</description>
     <link>https://tinybeachthor.github.io</link>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Aug 2021 06:16:03 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Aug 2021 17:25:21 +0000</lastBuildDate>
     <ttl>1800</ttl>
 
+    <item>
+      <title>Personal computers, personal computing, and data</title>
+      <pubDate>Tue, 24 Aug 2021 00:00:00 +0000</pubDate>
+      <link>https://tinybeachthor.github.io/post/personal-computing.html</link>
+      <guid>https://tinybeachthor.github.io/post/personal-computing.html</guid>
+      <description><![CDATA[<h1>Personal computers, personal computing, and data</h1>
+<ul>
+<li>Cloud - I don't care where the computation happens</li>
+<li>Von Neumann - data and operations are very simillar</li>
+<li>S3 - almost</li>
+<li>Erlang - systems that evolve</li>
+</ul>
+<h2>Cloud</h2>
+<p>I don't even know where this blog is hosted at.
+Somewhere in the cloud, who cares. As long as it works.</p>
+<p>Well, it's hosted on GitHub pages.
+I know where the sources are, everything is in git,
+gets built and transformed for publishing, and checked right back into git.
+Code and data together at last.</p>
+<h2>Are databases evil?</h2>
+<p>Von Neumann architecture.
+Why treat data and computation differently?
+Isn't treating data specially a huge regression?</p>
+<p>I reckon the answer is the same as for another question:
+Why would anyone write C in 2021?</p>
+<p>Can we have one system to handle everything:
+distribution, versioning, tables, assets, transformations, ...?
+Can we use Erlang?</p>
+<h2>State of the union</h2>
+<p>Streaming architectures are moving in the general direction of the grand
+unification of data and computation.
+Still, how do you update the processors?</p>
+<p>Blockchains come to mind here. Most are obsessing over semi-valid
+visions or grandeur.
+How did it work out for BitTorrent?
+New internet... sure.</p>
+<p>S3 is cool, as a simple abstraction over disk storage.</p>
+<p>Honorable mentions:</p>
+<ul>
+<li>kubernetes and friends</li>
+<li>virtualization</li>
+<li>WASM</li>
+</ul>
+]]></description>
+    </item>
     <item>
       <title>Towards EXPO2021</title>
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>

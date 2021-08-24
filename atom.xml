@@ -2,12 +2,61 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>OBSERVATIONS</title>
   <link href="https://tinybeachthor.github.io/atom.xml" rel="self" type="application/rss+xml" />
-  <updated>2021-08-10T06:16:03Z</updated>
+  <updated>2021-08-24T17:25:21Z</updated>
   <author>
       <name>Martin Toman</name>
   </author>
   <id>https://tinybeachthor.github.io/</id>
 
+  <entry>
+      <title>Personal computers, personal computing, and data</title>
+      <link href="https://tinybeachthor.github.io/post/personal-computing.html"/>
+      <id>https://tinybeachthor.github.io/post/personal-computing.html</id>
+      <updated>2021-08-24T00:00:00Z</updated>
+      <category term="computing"/>
+      <category term="distributed"/>
+      <category term="cloud"/>
+      <summary>they almost got it right</summary>
+      <content type="html"><![CDATA[<h1>Personal computers, personal computing, and data</h1>
+<ul>
+<li>Cloud - I don't care where the computation happens</li>
+<li>Von Neumann - data and operations are very simillar</li>
+<li>S3 - almost</li>
+<li>Erlang - systems that evolve</li>
+</ul>
+<h2>Cloud</h2>
+<p>I don't even know where this blog is hosted at.
+Somewhere in the cloud, who cares. As long as it works.</p>
+<p>Well, it's hosted on GitHub pages.
+I know where the sources are, everything is in git,
+gets built and transformed for publishing, and checked right back into git.
+Code and data together at last.</p>
+<h2>Are databases evil?</h2>
+<p>Von Neumann architecture.
+Why treat data and computation differently?
+Isn't treating data specially a huge regression?</p>
+<p>I reckon the answer is the same as for another question:
+Why would anyone write C in 2021?</p>
+<p>Can we have one system to handle everything:
+distribution, versioning, tables, assets, transformations, ...?
+Can we use Erlang?</p>
+<h2>State of the union</h2>
+<p>Streaming architectures are moving in the general direction of the grand
+unification of data and computation.
+Still, how do you update the processors?</p>
+<p>Blockchains come to mind here. Most are obsessing over semi-valid
+visions or grandeur.
+How did it work out for BitTorrent?
+New internet... sure.</p>
+<p>S3 is cool, as a simple abstraction over disk storage.</p>
+<p>Honorable mentions:</p>
+<ul>
+<li>kubernetes and friends</li>
+<li>virtualization</li>
+<li>WASM</li>
+</ul>
+]]></content>
+  </entry>
   <entry>
       <title>Towards EXPO2021</title>
       <link href="https://tinybeachthor.github.io/post/towards-expo-2021.html"/>
