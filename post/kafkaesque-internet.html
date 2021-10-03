@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177284059-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-177284059-1');
+  </script>
+  
+  <meta charset="UTF-8">
+  <meta name="description" content="OBSERVATIONS">
+  <meta name="author" content="Martin Toman">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <title>OBSERVATIONS - Kafkaesque Internet</title>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kafkaesque Internet">
+  <meta name="twitter:description" content="The Internet is broken.">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/font.css">
+</head>
+<body class="post">
+
+  <header>
+    <a href="https://tinybeachthor.github.io"><h1>Observations</h1></a>
+
+    <p class="title">
+      Kafkaesque Internet
+    </p>
+    <p class="date">Oct 02, 2021</p>
+    <br>
+    <div class="tags">
+      <span>#internet</span>
+      <span>#streams</span>
+      <span>#logs</span>
+    </div>
+  </header>
+
+  <article>
+    <h1>Kafkaesque Internet</h1>
+<blockquote>
+<p><strong>DISCLAIMER</strong>: this is an article about the internet from purely
+technological point of view.</p>
+</blockquote>
+<h2>What's the internet</h2>
+<p>When we talk the Internet, we really mean the web.
+And web is really just HTTP.</p>
+<h2>How it works</h2>
+<ol>
+<li>Send <code>OPTIONS</code> to see available methods</li>
+<li><code>GET</code> to retrieve content</li>
+<li><code>PUT</code> to add content</li>
+<li><code>POST</code> can update or do anything</li>
+</ol>
+<p>Except that's not how it works at all.</p>
+<h2>How it actually works</h2>
+<p>Pages update asynchronously.
+Content comes from multiple sources.
+Users submit multiple actions concurrently.
+Analytics are collected about everything.
+Content is generated on demand.</p>
+<p>And no one wants to see it fail or worse freeze while loading.
+And we would like everything to work offline.</p>
+<h2>Intermission : GraphQL</h2>
+<p>A nice real world example of a real world project recognizing the issues
+of pulling content from multiple sources in various formats is GraphQL.</p>
+<p>Send a single query describing the data you want.
+Get it the way you want on a best effort basis.
+(Even across multiple responses based on the priority.)</p>
+<p>Updates are iffy, because we want to push the user actions to the server
+ASAP, not wait and batch them.
+Also can still fail...</p>
+<h2>Eventual consistency required eventual delivery</h2>
+<p>To avoid failure, let's log every action locally before trying to
+execute it.
+Write-ahead logs are a very elegant solution from the database world.</p>
+<ol>
+<li>Log the user action to a local persistent log.</li>
+<li>Materialize the change into the local view.</li>
+<li>At convenience / when available, sync the log with the server.</li>
+</ol>
+<p>When we synchronize the logs we make them available for other devices to
+pull and materialize the collected actions locally themselves.
+Careful about conflicts -- we need to be deliberate about the way we
+handle conflicts.</p>
+<p>Conflict resolution is very application specific and requires careful
+planning.
+Sometimes simple last write wins can work just fine, sometimes we need
+to design the actions to not create conflicts (CRDTS), and sometimes we
+need to be very granular and have multiple resolution strategies.
+More about that some other time.</p>
+<h2>Globally Persistent Connections</h2>
+<p>A <code>User</code> can have multiple <code>Connection</code>s -- one per client.
+<code>Connection</code> can be <code>active</code> or <code>inactive</code>.
+<code>Active Connection</code> has a reserved data channel at the <code>Server</code> and will get
+an update whenever connected.
+An <code>active Connection</code> can be downgraded to <code>inactive</code> by the <code>Server</code>.
+<code>Inactive Connection</code> will not get updated but overwritten by a clone of
+an <code>active Connection</code> when connected to the <code>Server</code>.</p>
+<p>Setting resource limits is necessary to guarantee quality of service.</p>
+<p>We can be smart about transitioning <code>Connection</code>s to inactive though.</p>
+<h2>What do we get?</h2>
+<p>More like what do we not get?</p>
+<ul>
+<li>No errors! (just delays)</li>
+<li>No contradictions in state (if we materialize correctly)</li>
+<li>Full history (if we keep the logs)</li>
+<li>User authentication (partially, through the logs; still need initial)</li>
+</ul>
+<p>All of that for free, just by using persistent connections.
+And remember:</p>
+<blockquote>
+<p>Persistent connections are just write ahead logs.</p>
+</blockquote>
+<h2>Honorable mentions</h2>
+<h3>Kafka</h3>
+<p>Can we run it in browser?</p>
+<h3>ZeroMQ</h3>
+<p>Very cool project providing good abstractions over basic connections.
+Not quite new Internet, just Internet on steroids. Still cool though.</p>
+
+  </article>
+
+  <footer>
+    <span>
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/tree/master/posts">Content</a>
+      licensed under
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/posts/LICENSE"> CC BY 4.0</a>.
+    </span>
+    <span>
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io">Code</a>
+      licensed under
+      <a href="https://github.com/tinybeachthor/tinybeachthor.github.io/blob/master/LICENSE">BSD 3-Clause</a>.
+    </span>
+  </footer>
+
+<body>
+</html>
