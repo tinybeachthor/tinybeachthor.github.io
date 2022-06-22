@@ -7,9 +7,73 @@
     <description>random walk through time and space</description>
     <link>https://tinybeachthor.github.io</link>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Oct 2021 22:11:16 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jun 2022 18:13:46 +0000</lastBuildDate>
     <ttl>1800</ttl>
 
+    <item>
+      <title>Synchronize flake inputs</title>
+      <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
+      <link>https://tinybeachthor.github.io/post/flakes-sync.html</link>
+      <guid>https://tinybeachthor.github.io/post/flakes-sync.html</guid>
+      <description><![CDATA[<h1>Synchronize flake inputs</h1>
+<p>When working across multiple rust crates, of course as nix flakes,
+it is very easy to end up with multiple minor versions of the toolchain.
+Which is annoying and does not help all that much at all -
+the strong nix reproducibility is a nuisance in this case.</p>
+<h2>Solution</h2>
+<p>Using a super-flake to re-export the packages we can get the same version
+of the toolchain for multiple crate flakes.</p>
+<p>The super-flake will look something like this:</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">inputs</span> = {</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">flake-utils.url</span> = github:numtide/flake-utils/master<span class="kw">;</span></span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">nixpkgs.url</span> = github:NixOS/nixpkgs/nixos-22.05<span class="kw">;</span></span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">rust-overlay</span> = {</span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a>      <span class="ex">url</span> = github:oxalica/rust-overlay/master<span class="kw">;</span></span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>      <span class="ex">inputs</span> = {</span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">nixpkgs.follows</span> = <span class="st">&quot;nixpkgs&quot;</span><span class="kw">;</span></span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">flake-utils.follows</span> = <span class="st">&quot;flake-utils&quot;</span><span class="kw">;</span></span>
+<span id="10"><a href="#10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">}</span>;</span>
+<span id="11"><a href="#11" aria-hidden="true" tabindex="-1"></a>    };</span>
+<span id="12"><a href="#12" aria-hidden="true" tabindex="-1"></a>  };</span>
+<span id="13"><a href="#13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="14"><a href="#14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">outputs</span> = { self, flake-utils, nixpkgs, rust-overlay }:</span>
+<span id="15"><a href="#15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">{</span></span>
+<span id="16"><a href="#16" aria-hidden="true" tabindex="-1"></a>      <span class="ex">lib</span> = flake-utils.lib<span class="kw">;</span></span>
+<span id="17"><a href="#17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="18"><a href="#18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">//</span></span>
+<span id="19"><a href="#19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">flake-utils.lib.eachDefaultSystem</span> (system: rec</span>
+<span id="20"><a href="#20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">{</span></span>
+<span id="21"><a href="#21" aria-hidden="true" tabindex="-1"></a>      <span class="ex">packages</span> = (import nixpkgs {</span>
+<span id="22"><a href="#22" aria-hidden="true" tabindex="-1"></a>        <span class="ex">inherit</span> system<span class="kw">;</span></span>
+<span id="23"><a href="#23" aria-hidden="true" tabindex="-1"></a>        <span class="ex">overlays</span> = [</span>
+<span id="24"><a href="#24" aria-hidden="true" tabindex="-1"></a>          <span class="ex">rust-overlay.overlay</span></span>
+<span id="25"><a href="#25" aria-hidden="true" tabindex="-1"></a>        ];</span>
+<span id="26"><a href="#26" aria-hidden="true" tabindex="-1"></a>      <span class="kw">}</span>);</span>
+<span id="27"><a href="#27" aria-hidden="true" tabindex="-1"></a>    }); </span>
+<span id="28"><a href="#28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>We re-export the <code>nixpkgs</code> with <code>rust-overlay</code> applied,
+and also <code>flake-utils.lib</code> for convenience.</p>
+<p>The usage is simple:</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="2"><a href="#2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">inputs</span> = {</span>
+<span id="3"><a href="#3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">nix.url</span> = github:<span class="va">${REPO_OWNER}</span>/<span class="va">${REPO_NAME}</span>/master<span class="kw">;</span></span>
+<span id="4"><a href="#4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">}</span>;</span>
+<span id="5"><a href="#5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6"><a href="#6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">outputs</span> = { self, nix }:</span>
+<span id="7"><a href="#7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">with</span> nix.lib<span class="kw">;</span></span>
+<span id="8"><a href="#8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">eachSystem</span> [ system.x86_64-linux ] (system: {</span>
+<span id="9"><a href="#9" aria-hidden="true" tabindex="-1"></a>      <span class="ex">devShell</span> = import ./shell.nix {</span>
+<span id="10"><a href="#10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">pkgs</span> = nix.packages.<span class="va">${system}</span><span class="kw">;</span></span>
+<span id="11"><a href="#11" aria-hidden="true" tabindex="-1"></a>      };</span>
+<span id="12"><a href="#12" aria-hidden="true" tabindex="-1"></a>  });</span>
+<span id="13"><a href="#13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2>Bonus: auto-update</h2>
+<p>To auto update the input we can add the following command to the end of
+<a href="https://direnv.net/">.envrc</a>:</p>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span id="1"><a href="#1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix</span> flake update nix --commit-lock-file</span></code></pre></div>
+]]></description>
+    </item>
     <item>
       <title>Kafkaesque Internet</title>
       <pubDate>Sat, 02 Oct 2021 00:00:00 +0000</pubDate>
