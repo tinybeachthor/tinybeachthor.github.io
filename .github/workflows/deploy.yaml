@@ -31,7 +31,7 @@ jobs:
       run: ./result/bin/blog4
 
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@v4.6.9
+      uses: JamesIves/github-pages-deploy-action@v4.7.3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
